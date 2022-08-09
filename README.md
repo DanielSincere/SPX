@@ -2,7 +2,7 @@
 
 Swish is a Swift script running tool. Easily run Swift packages in a supporting relative dir named `Swish`
 
-Swish pairs nicely with [Dh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
+Swish pairs nicely with [Sh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
 
 ## Motivation
 

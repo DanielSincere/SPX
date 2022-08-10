@@ -4,6 +4,8 @@ Swish is a Swift script running tool. Easily run Swift packages in a supporting 
 
 Swish pairs nicely with [Sh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
 
+For a full example of using Swish, Sh, and ShXcrun on your iOS project, pleas see https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+
 ## Motivation
 
 There's currently not a great solution to declare some targets as dev dependencies or support scripts in a `Package.swift`. So what if we had a subdirectory with our Swift support scripts? `$PROJECT_ROOT/support-dir/Package.swift`?

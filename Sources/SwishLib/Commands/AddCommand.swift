@@ -2,8 +2,8 @@ import Foundation
 
 final class AddCommand {
 
-  let announcer: Announcer, swishDir: String
-  init(announcer: Announcer, swishDir: String) {
+  let announcer: Announcer?, swishDir: String
+  init(announcer: Announcer?, swishDir: String) {
     self.announcer = announcer
     self.swishDir = swishDir
   }
@@ -28,7 +28,7 @@ final class AddCommand {
       print("The date is \(date).")
       """#)
     let fullPath = try file.create(in: swishDir)
-    announcer.fileCreated(path: fullPath)
+    announcer?.fileCreated(path: fullPath)
 
     var packageContents = try String(contentsOfFile: swishDir + "/Package.swift")
     let newTarget =
@@ -41,7 +41,7 @@ final class AddCommand {
     """
     packageContents.append(contentsOf: newTarget)
     try packageContents.write(toFile: swishDir + "/Package.swift", atomically: true, encoding: .utf8)
-    announcer.fileModified(path: swishDir + "/Package.swift")
+    announcer?.fileModified(path: swishDir + "/Package.swift")
   }
 
   enum Errors: Error {

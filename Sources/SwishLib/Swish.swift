@@ -45,7 +45,8 @@ public struct Swish {
       default:
         let targetName = arguments[0]
         let targetArguments = arguments.dropFirst()
-        try ExecCommand(announcer: announcer, swishDir: swishDir).exec(targetName: targetName, targetArguments: Array(targetArguments))
+        try ExecCommand(announcer: announcer, swishDir: swishDir)
+          .exec(targetName: targetName, targetArguments: Array(targetArguments))
       }
     } else {
       HelpCommand(swishDir: swishDir).exec()

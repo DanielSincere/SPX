@@ -3,8 +3,8 @@ import Foundation
 
 final class ExecCommand {
 
-  let announcer: Announcer, swishDir: String
-  init(announcer: Announcer, swishDir: String) {
+  let announcer: Announcer?, swishDir: String
+  init(announcer: Announcer?, swishDir: String) {
     self.announcer = announcer
     self.swishDir = swishDir
   }
@@ -17,7 +17,7 @@ final class ExecCommand {
       throw Errors.targetNotFound(named: targetName, availableTargets: targetNames)
     }
 
-    announcer.running(target: targetName)
+    announcer?.running(target: targetName)
     do {
       try sh(.terminal, "swift run --package-path \(swishDir) \(targetName) \(targetArguments.joined(separator: " "))")
     } catch {

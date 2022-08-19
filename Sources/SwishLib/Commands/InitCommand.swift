@@ -2,19 +2,19 @@ import Foundation
 
 final class InitCommand {
 
-  let announcer: Announcer, swishDir: String
-  init(announcer: Announcer, swishDir: String) {
+  let announcer: Announcer?, swishDir: String
+  init(announcer: Announcer?, swishDir: String) {
     self.announcer = announcer
     self.swishDir = swishDir
   }
 
   func exec() throws {
 
-    announcer.scaffolding(path: swishDir)
+    announcer?.scaffolding(path: swishDir)
 
     for file in files {
       let fullPath = try file.create(in: swishDir)
-      announcer.fileCreated(path: fullPath)
+      announcer?.fileCreated(path: fullPath)
     }
   }
 

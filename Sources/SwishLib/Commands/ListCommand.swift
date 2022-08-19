@@ -2,17 +2,16 @@ import Foundation
 
 final class ListCommand {
 
-  let announcer: Announcer, swishDir: String
-  init(announcer: Announcer, swishDir: String) {
+  let announcer: Announcer?, swishDir: String
+  init(announcer: Announcer?, swishDir: String) {
     self.announcer = announcer
     self.swishDir = swishDir
   }
 
+  @discardableResult
   func exec() throws -> [SwiftPackageDump.Target] {
-    try SwiftPackageDump.discover(swishDir: swishDir).executableTargets
-  }
-
-  func announce() throws {
-    announcer.list(targets: try self.exec())
+    let result = try SwiftPackageDump.discover(swishDir: swishDir).executableTargets
+    announcer?.list(targets: result)
+    return result
   }
 }

@@ -10,11 +10,11 @@ struct SwiftPackageDump: Decodable {
     let type: String
   }
 
-  func executableTargets() -> [Target] {
-    targets.filter({ $0.type == "executable" })
+  var executableTargets: [Target] {
+    targets.filter { $0.type == "executable" }
   }
 
-  func target(named name: String) -> Target? {
+  func executableTarget(named name: String) -> Target? {
     targets.first(where: { $0.name == name && $0.type == "executable" })
   }
 
@@ -23,12 +23,6 @@ struct SwiftPackageDump: Decodable {
     guard FileManager.default.isReadableFile(atPath: "\(swishDir)/Package.swift") else {
       throw Errors.couldNotFindPackageDotSwift(path: "\(swishDir)/Package.swift")
     }
-
-//     guard let json: String = try sh("swift package --package-path \(swishDir) dump-package") else {
-//       throw Errors.couldNotParseJson
-//     }
-//
-//     return try JSONDecoder().decode(SwiftPackageDump.self, from: json.data(using: .utf8)!)
 
     return try sh(SwiftPackageDump.self, "swift package --package-path \(swishDir) dump-package")
   }

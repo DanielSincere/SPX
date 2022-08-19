@@ -11,7 +11,7 @@ final class ExecCommand {
 
   func exec(targetName: String, targetArguments: Array<String>) throws {
     let package = try SwiftPackageDump.discover(swishDir: swishDir)
-    let targetNames = package.executableTargets().map { $0.name }
+    let targetNames = package.executableTargets.map { $0.name }
 
     guard targetNames.contains(targetName) else {
       throw Errors.targetNotFound(named: targetName, availableTargets: targetNames)

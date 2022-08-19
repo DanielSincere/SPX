@@ -1,15 +1,12 @@
 import Foundation
 
-@main
-struct Swish {
+public struct Swish {
 
   let announcer = Announcer()
 
-  static func main() {
-    Self().run(CommandLine.arguments)
-  }
-
-  func run(_ arguments: [String]) {
+  public init() {}
+  
+  public func run(_ arguments: [String]) {
     do {
       let defaultScriptsDir = "Swish"
       try self.parse(arguments: Array(arguments.dropFirst()), swishDir: defaultScriptsDir)

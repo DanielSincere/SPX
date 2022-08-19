@@ -1,5 +1,5 @@
 import XCTest
-@testable import Swish
+@testable import SwishLib
 
 final class AddCommandTests: XCTestCase {
 

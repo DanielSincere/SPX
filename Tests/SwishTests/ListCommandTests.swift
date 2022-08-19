@@ -3,19 +3,13 @@ import XCTest
 
 final class ListCommandTests: XCTestCase {
 
-  func testList() throws {
+  func testSingleTargetFixture() throws {
 
-    class FakeAnnouncer: Announcing {
-      var receivedPackage: SwiftPackageDump?
-      func listTargets(of package: SwiftPackageDump) {
-        self.receivedPackage = package
-      }
-    }
-    let fake = FakeAnnouncer()
-    let dir = Bundle.module.resourcePath! + "/Fixtures/a"
-    try ListCommand(announcer: fake, swishDir: dir).exec()
+    let dir = Bundle.module.resourcePath! + "/Fixtures/single-target-fixture"
+    let targets = try ListCommand(announcer: .init(), swishDir: dir).exec()
 
-    XCTAssertNotNil(fake.receivedPackage)
-    XCTAssertNotNil(fake.receivedPackage?.executableTarget(named: "a"))
+    XCTAssertEqual(targets.count, 1)
+    XCTAssertEqual(targets.first?.name, "example")
+    XCTAssertEqual(targets.first?.type, "executable")
   }
 }

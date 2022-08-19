@@ -3,11 +3,11 @@
 import PackageDescription
 
 let package = Package(
-  name: "Sample A",
+  name: "Single Target Fixture",
   dependencies: [],
   targets: [
     .executableTarget(
-      name: "a",
+      name: "example",
       dependencies: []),
   ]
 )

@@ -1,11 +1,7 @@
 import Foundation
 import Rainbow
 
-protocol Announcing {
-  func listTargets(of package: SwiftPackageDump)
-}
-
-struct Announcer: Announcing {
+struct Announcer {
 
   func fileCreated(path: String) {
     self.announce("Created `\(path)`")
@@ -19,9 +15,9 @@ struct Announcer: Announcing {
     self.announce("Running target named `\(target)`")
   }
 
-  func listTargets(of package: SwiftPackageDump) {
+  func list(targets: [SwiftPackageDump.Target]) {
     self.announce("Available targets:")
-    for t in package.executableTargets {
+    for t in targets {
       self.announce("\t\(t.name)")
     }
   }

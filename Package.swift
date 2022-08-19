@@ -23,6 +23,9 @@ let package = Package(
       dependencies: ["Sh", "Rainbow"]),
     .testTarget(
       name: "SwishTests",
-      dependencies: ["SwishLib"]),
+      dependencies: ["SwishLib"],
+      resources: [
+        .copy("Fixtures"),
+      ]),
   ]
 )

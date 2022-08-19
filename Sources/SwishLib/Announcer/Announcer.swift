@@ -1,7 +1,11 @@
 import Foundation
 import Rainbow
 
-struct Announcer {
+protocol Announcing {
+  func listTargets(of package: SwiftPackageDump)
+}
+
+struct Announcer: Announcing {
 
   func fileCreated(path: String) {
     self.announce("Created `\(path)`")

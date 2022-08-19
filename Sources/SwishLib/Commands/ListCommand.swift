@@ -2,8 +2,8 @@ import Foundation
 
 final class ListCommand {
 
-  let announcer: Announcer, swishDir: String
-  init(announcer: Announcer, swishDir: String) {
+  let announcer: Announcing, swishDir: String
+  init(announcer: Announcing, swishDir: String) {
     self.announcer = announcer
     self.swishDir = swishDir
   }

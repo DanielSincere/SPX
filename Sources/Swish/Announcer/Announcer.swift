@@ -17,7 +17,7 @@ struct Announcer {
 
   func listTargets(of package: SwiftPackageDump) {
     self.announce("Available targets:")
-    for t in package.targets {
+    for t in package.executableTargets() {
       self.announce("\t\(t.name)")
     }
   }

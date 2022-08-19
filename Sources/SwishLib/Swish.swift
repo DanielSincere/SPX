@@ -36,7 +36,7 @@ public struct Swish {
         try ListCommand(announcer: announcer, swishDir: swishDir).exec()
 
       case "--build", "-b":
-        try BuildCommand(announcer: announcer, swishDir: swishDir).exec()
+        try BuildCommand(announcer: announcer, runner: Runner(), swishDir: swishDir).exec()
 
       case "--add", "-a":
         let arguments = Array(arguments.dropFirst())
@@ -45,7 +45,7 @@ public struct Swish {
       default:
         let targetName = arguments[0]
         let targetArguments = arguments.dropFirst()
-        try ExecCommand(announcer: announcer, swishDir: swishDir)
+        try ExecCommand(announcer: announcer, runner: Runner(), swishDir: swishDir)
           .exec(targetName: targetName, targetArguments: Array(targetArguments))
       }
     } else {

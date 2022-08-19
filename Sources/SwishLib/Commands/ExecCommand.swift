@@ -1,10 +1,10 @@
-import Sh
 import Foundation
 
 final class ExecCommand {
 
-  let announcer: Announcer?, swishDir: String
-  init(announcer: Announcer?, swishDir: String) {
+  let announcer: Announcer?, runner: Running, swishDir: String
+  init(announcer: Announcer?, runner: Running, swishDir: String) {
+    self.runner = runner
     self.announcer = announcer
     self.swishDir = swishDir
   }
@@ -18,8 +18,14 @@ final class ExecCommand {
     }
 
     announcer?.running(target: targetName)
+
+    var cmd = "swift run --package-path \(swishDir) \(targetName)"
+    if !targetArguments.isEmpty {
+      cmd += " \(targetArguments.joined(separator: " "))"
+    }
+
     do {
-      try sh(.terminal, "swift run --package-path \(swishDir) \(targetName) \(targetArguments.joined(separator: " "))")
+      try runner.exec(cmd: cmd)
     } catch {
       throw Errors.errorRunning(target: targetName, error: error)
     }

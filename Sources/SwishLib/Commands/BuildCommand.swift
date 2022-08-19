@@ -1,21 +1,27 @@
-import Sh
 import Foundation
 
 final class BuildCommand {
 
-  let announcer: Announcer?, swishDir: String
-  init(announcer: Announcer?, swishDir: String) {
+  let announcer: Announcer?, runner: Running, swishDir: String
+  init(announcer: Announcer?, runner: Running, swishDir: String) {
     self.announcer = announcer
     self.swishDir = swishDir
+    self.runner = runner
   }
 
   func exec() throws {
     announcer?.building(path: swishDir)
     do {
-      try sh(.terminal, "rm -fr \(swishDir)/.build")
-      try sh(.terminal, "swift build --package-path \(swishDir)")
+      try self.removeBuildDir()
+      try runner.exec(cmd: "swift build --package-path \(swishDir)")
     } catch {
       throw Errors.build(error: error)
+    }
+  }
+
+  private func removeBuildDir() throws {
+    if FileManager.default.fileExists(atPath: "\(swishDir)/.build") {
+      try FileManager.default.removeItem(atPath: "\(swishDir)/.build")
     }
   }
 

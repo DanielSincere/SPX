@@ -5,7 +5,7 @@ final class ListCommandTests: XCTestCase {
 
   func testSingleTargetFixture() throws {
 
-    let dir = Bundle.module.resourcePath! + "/Fixtures/single-target-fixture"
+    let dir = Fixtures.singleTargetFixture.dir
     let targets = try ListCommand(announcer: nil, swishDir: dir)
       .exec()
 

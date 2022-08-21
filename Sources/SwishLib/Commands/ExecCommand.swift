@@ -10,7 +10,7 @@ final class ExecCommand {
   }
 
   func exec(targetName: String, targetArguments: Array<String>) throws {
-    let package = try SwiftPackageDump.discover(swishDir: swishDir)
+    let package = try SwiftPackageDump.discover(runner: runner, swishDir: swishDir)
     let targetNames = package.executableTargets.map { $0.name }
 
     guard targetNames.contains(targetName) else {
@@ -19,7 +19,7 @@ final class ExecCommand {
 
     announcer?.running(target: targetName)
 
-    var cmd = "swift run --package-path \(swishDir) \(targetName)"
+    var cmd = "xcrun --sdk macosx swift run --package-path \(swishDir) \(targetName)"
     if !targetArguments.isEmpty {
       cmd += " \(targetArguments.joined(separator: " "))"
     }

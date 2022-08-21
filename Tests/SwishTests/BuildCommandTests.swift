@@ -12,9 +12,6 @@ final class BuildCommandTests: XCTestCase {
       .exec()
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)
-    XCTAssertEqual(fakeRunner.receivedCommands.first, "swift build --package-path \(dir)")
+    XCTAssertEqual(fakeRunner.receivedCommands.first, "xcrun --sdk macosx swift build --package-path \(dir)")
   }
 }
-
-
-

@@ -19,7 +19,7 @@ final class ExecCommand {
 
     announcer?.running(target: targetName)
 
-    var cmd = "xcrun --sdk macosx swift run --package-path \(swishDir) \(targetName)"
+    var cmd = "swift run --package-path \(swishDir) \(targetName)"
     if !targetArguments.isEmpty {
       cmd += " \(targetArguments.joined(separator: " "))"
     }

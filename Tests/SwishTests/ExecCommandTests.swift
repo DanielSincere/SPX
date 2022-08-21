@@ -11,7 +11,7 @@ final class ExecCommandTests: XCTestCase {
     try ExecCommand(announcer: nil, runner: fakeRunner, swishDir: dir).exec(targetName: "example", targetArguments: [])
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)
-    XCTAssertEqual(fakeRunner.receivedCommands.first, "xcrun --sdk macosx swift run --package-path \(dir) example")
+    XCTAssertEqual(fakeRunner.receivedCommands.first, "swift run --package-path \(dir) example")
   }
 
   func testSingleTargetFixtureWithArguments() throws {
@@ -22,6 +22,6 @@ final class ExecCommandTests: XCTestCase {
     try ExecCommand(announcer: nil, runner: fakeRunner, swishDir: dir).exec(targetName: "example", targetArguments: ["a", "b", "c"])
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)
-    XCTAssertEqual(fakeRunner.receivedCommands.first, "xcrun --sdk macosx swift run --package-path \(dir) example a b c")
+    XCTAssertEqual(fakeRunner.receivedCommands.first, "swift run --package-path \(dir) example a b c")
   }
 }

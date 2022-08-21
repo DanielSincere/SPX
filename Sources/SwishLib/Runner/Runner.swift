@@ -2,11 +2,20 @@ import Foundation
 import Sh
 
 final class Runner: Running {
+  
   func parse(cmd: String) throws -> SwiftPackageDump {
-    try sh(SwiftPackageDump.self, cmd)
+#if os(macOS)
+    return try sh(SwiftPackageDump.self, "xcrun --sdk macosx \(cmd)")
+#else
+    return try sh(SwiftPackageDump.self, cmd)
+#endif
   }
-
+  
   func exec(cmd: String) throws {
-    try sh(.terminal, cmd)
+#if os(macOS)
+    return try sh(.terminal, "xcrun --sdk macosx \(cmd)")
+#else
+    return try sh(.terminal, cmd)
+#endif
   }
 }

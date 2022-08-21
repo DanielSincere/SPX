@@ -3,7 +3,7 @@ import Sh
 
 final class Runner: Running {
   
-  func parse(cmd: String) throws -> SwiftPackageDump {
+  func parseSwiftPackage(cmd: String) throws -> SwiftPackageDump {
 #if os(macOS)
     return try sh(SwiftPackageDump.self, "xcrun --sdk macosx \(cmd)")
 #else

@@ -10,7 +10,7 @@ final class FakeRunner: Running {
   
   var returnedSwiftPackageDump: SwiftPackageDump?
   
-  func parse(cmd: String) throws -> SwiftPackageDump {
+  func parseSwiftPackage(cmd: String) throws -> SwiftPackageDump {
     if let returnedSwiftPackageDump = returnedSwiftPackageDump {
       receivedCommands.append(cmd)
       return returnedSwiftPackageDump

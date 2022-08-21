@@ -23,13 +23,8 @@ struct SwiftPackageDump: Decodable {
     guard FileManager.default.isReadableFile(atPath: "\(swishDir)/Package.swift") else {
       throw Errors.couldNotFindPackageDotSwift(path: "\(swishDir)/Package.swift")
     }
-
-    #if os(macOS)
-    return try sh(SwiftPackageDump.self, "xcrun --sdk macosx swift package --package-path \(swishDir) dump-package")
-    #else
-    return nil
-    #endif
     
+    return try runner.parseSwiftPackage(cmd: "swift package --package-path \(swishDir) dump-package")
   }
 
   enum Errors: Error, LocalizedError {

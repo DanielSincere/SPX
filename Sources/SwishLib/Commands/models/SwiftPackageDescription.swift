@@ -1,7 +1,7 @@
 import Sh
 import Foundation
 
-struct SwiftPackageDump: Decodable {
+struct SwiftPackageDescription: Decodable {
 
   let targets: [Target]
 

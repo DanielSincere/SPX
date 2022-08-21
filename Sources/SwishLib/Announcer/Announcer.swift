@@ -15,7 +15,7 @@ struct Announcer {
     self.announce("Running target named `\(target)`")
   }
 
-  func list(targets: [SwiftPackageDump.Target]) {
+  func list(targets: [SwiftPackageDescription.Target]) {
     self.announce("Available targets:")
     for t in targets {
       self.announce("\t\(t.name)")

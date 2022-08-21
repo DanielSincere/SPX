@@ -7,7 +7,7 @@ final class ExecCommandTests: XCTestCase {
 
     let dir = Fixtures.singleTargetFixture.dir
 
-    let fakeRunner = FakeRunner()
+    let fakeRunner = ParsingFakeRunner()
     try ExecCommand(announcer: nil, runner: fakeRunner, swishDir: dir).exec(targetName: "example", targetArguments: [])
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)
@@ -18,7 +18,7 @@ final class ExecCommandTests: XCTestCase {
 
     let dir = Fixtures.singleTargetFixture.dir
 
-    let fakeRunner = FakeRunner()
+    let fakeRunner = ParsingFakeRunner()
     try ExecCommand(announcer: nil, runner: fakeRunner, swishDir: dir).exec(targetName: "example", targetArguments: ["a", "b", "c"])
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)

@@ -10,8 +10,8 @@ final class ListCommand {
   }
 
   @discardableResult
-  func exec() throws -> [SwiftPackageDump.Target] {
-    let package = try SwiftPackageDump.discover(runner: runner, swishDir: swishDir)
+  func exec() throws -> [SwiftPackageDescription.Target] {
+    let package = try SwiftPackageDescription.discover(runner: runner, swishDir: swishDir)
     let targets = package.executableTargets
     announcer?.list(targets: targets)
     return targets

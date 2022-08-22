@@ -13,7 +13,7 @@ final class HelpCommand {
 
     Regular use:
 
-    \("Swish".cyan) \("<target-name>".yellow) [arguments...]
+    \("swish".cyan) \("<target-name>".yellow) [arguments...]
 
     - \("<target-name>".yellow)  The name of the `executableTarget` in the
                                  `Package.swift` in the `\(swishDir)`
@@ -47,6 +47,11 @@ final class HelpCommand {
 
     \("swish".cyan) \("--build".cyan), -b
         update & build the scripts package, as a convenience.
+    
+    \("swish".cyan) \("--macosx".cyan) \("<target-name>".yellow) [arguments...]
+        useful when using \("swish".cyan) in a script step of an Xcode
+        project. Run \("<target-name>".yellow), by using
+        `xcrun --sdk macosx swift [...]`
 
 
     """

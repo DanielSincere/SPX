@@ -47,7 +47,19 @@ public struct Swish {
         let arguments = Array(arguments.dropFirst())
         try AddCommand(announcer: announcer, swishDir: swishDir)
           .exec(arguments: arguments)
-
+      
+      case "--macosx":
+        let arguments = Array(arguments.dropFirst())
+        guard !arguments.isEmpty else {
+          HelpCommand(swishDir: swishDir)
+            .exec()
+          exit(EXIT_FAILURE)
+        }
+        let targetName = arguments[0]
+        let targetArguments = arguments.dropFirst()
+        let runner = Runner(isForcingMacOSXSDK: true)
+        try ExecCommand(announcer: announcer, runner: runner, swishDir: swishDir)
+          .exec(targetName: targetName, targetArguments: Array(targetArguments))
       default:
         let targetName = arguments[0]
         let targetArguments = arguments.dropFirst()

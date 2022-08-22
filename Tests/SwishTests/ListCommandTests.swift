@@ -6,7 +6,8 @@ final class ListCommandTests: XCTestCase {
   func testSingleTargetFixture() throws {
 
     let dir = Fixtures.singleTargetFixture.dir
-    let targets = try ListCommand(announcer: nil, swishDir: dir)
+    let runner = Runner()
+    let targets = try ListCommand(announcer: nil, runner: runner, swishDir: dir)
       .exec()
 
     XCTAssertEqual(targets.count, 1)

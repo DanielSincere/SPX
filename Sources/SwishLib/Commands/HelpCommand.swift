@@ -13,7 +13,7 @@ final class HelpCommand {
 
     Regular use:
 
-    \("Swish".cyan) \("<target-name>".yellow) [arguments...]
+    \("swish".cyan) \("<target-name>".yellow) [arguments...]
 
     - \("<target-name>".yellow)  The name of the `executableTarget` in the
                                  `Package.swift` in the `\(swishDir)`
@@ -47,8 +47,7 @@ final class HelpCommand {
 
     \("swish".cyan) \("--build".cyan), -b
         update & build the scripts package, as a convenience.
-
-
+    
     """
     .data(using: .utf8)
     .map(FileHandle.standardError.write(_:))

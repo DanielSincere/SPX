@@ -15,6 +15,3 @@ final class BuildCommandTests: XCTestCase {
     XCTAssertEqual(fakeRunner.receivedCommands.first, "swift build --package-path \(dir)")
   }
 }
-
-
-

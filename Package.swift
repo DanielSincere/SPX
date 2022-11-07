@@ -12,7 +12,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.0"),
-    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.0.0"),
+    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.0.2"),
   ],
   targets: [
     .executableTarget(

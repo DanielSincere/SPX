@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Rainbow",
-        "repositoryURL": "https://github.com/onevcat/Rainbow",
-        "state": {
-          "branch": null,
-          "revision": "e0dada9cd44e3fa7ec3b867e49a8ddbf543e3df3",
-          "version": "4.0.1"
-        }
-      },
-      {
-        "package": "Sh",
-        "repositoryURL": "https://github.com/FullQueueDeveloper/Sh.git",
-        "state": {
-          "branch": null,
-          "revision": "4b9e5a6b29afcf12baea8e97dc217a2a9ba64d62",
-          "version": "1.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "rainbow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Rainbow",
+      "state" : {
+        "revision" : "e0dada9cd44e3fa7ec3b867e49a8ddbf543e3df3",
+        "version" : "4.0.1"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "sh",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/Sh.git",
+      "state" : {
+        "revision" : "fc6bfa4c6562436d1bc681e205ceeca78662d966",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
 }

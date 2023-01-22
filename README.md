@@ -18,7 +18,13 @@ This is all doable. And this becomes repetitive across multiple projects.
 
 ## Installation
 
-Swish is currently available through [Mint](https://github.com/yonaskolb/Mint) or manual installation.
+Swish is currently available through [Homebrew](https://brew.sh), [Mint](https://github.com/yonaskolb/Mint), or manual installation.
+
+### Homebrew
+
+Install with [Homebrew](https://brew.sh)
+
+    brew install fullqueuedeveloper/swish/swish
 
 ### Mint
 

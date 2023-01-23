@@ -49,11 +49,12 @@ final class AddCommand {
         """
         import \(name.capitalized)Lib
 
-        let date = try \(name.capitalized)().fetch()
+        let date = try \(name.capitalized)().fetchFromShell()
+
         """ +
         #"print("The date is \(date).")"#
       ),
-      ScaffoldFile(directory: "Sources/\(name)Lib",
+      ScaffoldFile(directory: "Sources/\(name.capitalized)Lib",
                    name: "\(name).swift",
                    contents:
       """

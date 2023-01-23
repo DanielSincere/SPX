@@ -20,7 +20,7 @@ final class InitCommand {
 
   private var files: [ScaffoldFile] {
     [
-      .init(directory: "Sources/Date", name: "main.swift", contents:
+      .init(directory: "Sources/date", name: "main.swift", contents:
         #"""
         import DateLib
         import Foundation
@@ -29,12 +29,12 @@ final class InitCommand {
         print("The date is \(date).")
         """#
       ),
-      .init(directory: "Sources/DateLib", name: "Date.swift", contents:
+      .init(directory: "Sources/DateLib", name: "fetchDateFromShell.swift", contents:
         #"""
         import Sh
         import Foundation
 
-        func fetchDateFromShell() throws -> Date {
+        public func fetchDateFromShell() throws -> Date {
           let timeInterval = try sh(TimeInterval.self, "date +%s")
           let date = Date(timeIntervalSince1970: timeInterval)
           return date

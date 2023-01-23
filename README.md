@@ -106,6 +106,8 @@ I recommend using the old style of Swift targets, an executable target and a reg
 
 There is an example project in the `demos` folder
 
-- The `VaporDemo` is a [Vapor](https://vapor.codes) app. It can be a handful to type out a full `docker build` command with all flags and arguments. This example is short, but still meaningful. Running `swish docker` from the `demos/VaporDemo` directory will build the docker container for this small vapor app.
+- The `VaporDemo` is a [Vapor](https://vapor.codes) app. This example is short, but still meaningful. Running `swish docker` from the `demos/VaporDemo` directory will build the docker container for this small vapor app.
 
 - Screenshots. This PR shows the power of using Swish & Swift for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
+
+- Demo iOS project https://github.com/FullQueueDeveloper/SwishExampleiOSProject

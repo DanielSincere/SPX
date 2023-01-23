@@ -43,13 +43,14 @@ final class HelpCommand {
     \("swish".cyan) \("--add".cyan) \("<name>".yellow), -a
         add a new script named `\("<name>".yellow)` by
         creating a file at path `\("Sources/<name>/main.swift".yellow)`
-        & adding an `.executableTarget` to `Package.swift`
+        & a file at path `\("Sources/<Name>Lib/<Name>.swift".yellow)`,
+        & adding a their targets to `Package.swift`
 
     \("swish".cyan) \("--build".cyan), -b
         update & build the scripts package, as a convenience.
-    
+
     Learn more at \("https://github.com/FullQueueDeveloper/Swish".green)
-    
+
     """
     .data(using: .utf8)
     .map(FileHandle.standardError.write(_:))

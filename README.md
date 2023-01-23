@@ -24,6 +24,7 @@ Swish is currently available through [Homebrew](https://brew.sh), [Mint](https:/
 
 Install with [Homebrew](https://brew.sh)
 
+    brew tap fullqueuedeveloper/swish
     brew install fullqueuedeveloper/swish/swish
 
 ### Mint
@@ -46,15 +47,16 @@ And then add `.build/release/` to your `$PATH`.
 
 Will scaffold a new Swish project in the `swish` subdirectory of your current working directory. This is what it will look like.
 
-    CWD
+    $PWD
      |
      +- Swish
           |
           +- Package.swift
           +- .gitignore
-          +- Sources/script1/main.swift
+          +- Sources/date/main.swift
+          +- Sources/DateLib/fetchDateFromShell.swift
 
-Then you can run `swish` or `swish --list` to see the current executable targets. Then you can run `swish script1` to run the simple sample script named `script1`.
+Then you can run `swish` or `swish --list` to see the current executable targets. Then you can run `swish date` to run the simple sample script named `date`.
 
 ## Usage
 
@@ -89,14 +91,21 @@ Then you can run `swish` or `swish --list` to see the current executable targets
 
     swish --add <name>
         add a new script named <name> by
-        creating a file at path `Sources/<name>/main.swift`
-        & adding an `.executableTarget` to `Package.swift`
+        creating a file at path `Sources/<name>/main.swift`,
+        & a file at path `Sources/<Name>Lib/<Name>.swift`,
+        & adding their targets to `Package.swift`
 
     swish --build
         update & build the scripts package, as a convenience.
+
+### Note on package structure
+
+I recommend using the old style of Swift targets, an executable target and a regular target for each script. I recommend the executable target depends only on the regular target. And the regular target is free to depend on external dependencies. Otherwise, in my experience, the package will fail to build about 50% of the time, even with Swift 5.7 on macOS 12 with Xcode 14.
 
 ## Demos
 
 There is an example project in the `demos` folder
 
 - The `VaporDemo` is a [Vapor](https://vapor.codes) app. It can be a handful to type out a full `docker build` command with all flags and arguments. This example is short, but still meaningful. Running `swish docker` from the `demos/VaporDemo` directory will build the docker container for this small vapor app.
+
+- Screenshots. This PR shows the power of using Swish & Swift for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14

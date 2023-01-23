@@ -18,24 +18,18 @@ final class AddCommand {
 
   func exec(name: String) throws {
 
-    let file = ScaffoldFile(directory: "Sources/\(name)", name: "main.swift", contents:
-      #"""
-      import Sh
-      import Foundation
-
-      let timeInterval = try sh(TimeInterval.self, "date +%s")
-      let date = Date(timeIntervalSince1970: timeInterval)
-      print("The date is \(date).")
-      """#)
-    let fullPath = try file.create(in: swishDir)
-    announcer?.fileCreated(path: fullPath)
+    for file in self.files(name: name) {
+      let fullPath = try file.create(in: swishDir)
+      announcer?.fileCreated(path: fullPath)
+    }
 
     var packageContents = try String(contentsOfFile: swishDir + "/Package.swift")
     let newTarget =
     """
 
     package.targets += [
-      .executableTarget(name: "\(name)", dependencies: ["Sh"])
+      .target(name: "\(name)Lib", dependencies: ["Sh"])
+      .executableTarget(name: "\(name)", dependencies: ["\(name)Lib"])
     ]
 
     """
@@ -46,5 +40,30 @@ final class AddCommand {
 
   enum Errors: Error {
     case scriptNameMissing
+  }
+
+  func files(name: String) -> [ScaffoldFile] {
+    [
+      ScaffoldFile(directory: "Sources/\(name)", name: "main.swift", contents:
+      #"""
+      import \(name)Lib
+      import Foundation
+
+      let date = try \(name)().fetch()
+      print("The date is \(date).")
+      """#),
+      ScaffoldFile(directory: "Sources/\(name)Lib", name: "\(name).swift", contents:
+      #"""
+      import Sh
+      import Foundation
+
+      public struct \(name) {
+        public func fetchFromShell() throws -> Date {
+          let timeInterval = try sh(TimeInterval.self, "date +%s")
+          return Date(timeIntervalSince1970: timeInterval)
+        }
+      }
+      """#),
+    ]
   }
 }

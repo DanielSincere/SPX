@@ -22,7 +22,7 @@ jobs:
       - uses: swift-actions/setup-swift@v1
         with:
           swift-version: ${{ matrix.swift }}
-      - run: swift --version
+
       - uses: actions/checkout@v2
 
       - name: "swift test"

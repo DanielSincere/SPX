@@ -49,7 +49,7 @@ jobs:
           path: Swish
 
       - name: "test: run"
-        run: $(swift build -c release --show-bin-path)/swish Date
+        run: $(swift build -c release --show-bin-path)/swish Date2
 
       - name: "test: build"
         run: $(swift build -c release --show-bin-path)/swish --build

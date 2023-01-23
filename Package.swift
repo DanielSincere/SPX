@@ -1,11 +1,11 @@
-// swift-tools-version: 5.6
+// swift-tools-version: 5.7
 
 import PackageDescription
 
 let package = Package(
   name: "Swish",
   platforms: [
-    .macOS(.v11),
+    .macOS(.v12),
   ],
   products: [
     .executable(name: "swish", targets: ["swish"]),

@@ -22,31 +22,48 @@ final class InitCommand {
     [
       .init(directory: "Sources/Date", name: "main.swift", contents:
         #"""
+        import DateLib
+        import Foundation
+
+        let date = try fetchDateFromShell()
+        print("The date is \(date).")
+        """#
+      ),
+      .init(directory: "Sources/DateLib", name: "Date.swift", contents:
+        #"""
         import Sh
         import Foundation
 
-        let timeInterval = try sh(TimeInterval.self, "date +%s")
-        let date = Date(timeIntervalSince1970: timeInterval)
-        print("The date is \(date).")
+        func fetchDateFromShell() throws -> Date {
+          let timeInterval = try sh(TimeInterval.self, "date +%s")
+          let date = Date(timeIntervalSince1970: timeInterval)
+          return date
+        }
+
         """#
       ),
       .init(directory: nil, name: "Package.swift", contents:
         """
-        // swift-tools-version:5.5
+        // swift-tools-version:5.7
 
         import PackageDescription
 
         let package = Package(
           name: "Scripts",
-          platforms: [.macOS(.v11)],
+          platforms: [.macOS(.v12)],
+          products: [
+            .executable(name: "date", targets: ["date"]),
+          ],
           dependencies: [
             .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.0.0"),
           ],
           targets: [
             .executableTarget(
-              name: "Date",
-              dependencies: ["Sh"]
-            ),
+              name: "date",
+              dependencies: ["DateLib"]),
+            .target(
+              name: "DateLib",
+              dependencies: ["Sh"]),
           ]
         )
         """
@@ -55,6 +72,7 @@ final class InitCommand {
         """
         .build
         .DS_Store
+        .swiftpm
         """
       )
     ]

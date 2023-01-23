@@ -26,12 +26,10 @@ final class AddCommand {
     var packageContents = try String(contentsOfFile: swishDir + "/Package.swift")
     let newTarget =
     """
-
     package.targets += [
-      .target(name: "\(name)Lib", dependencies: ["Sh"]),
-      .executableTarget(name: "\(name)", dependencies: ["\(name)Lib"])
+      .target(name: "\(name.capitalized)Lib", dependencies: ["Sh"]),
+      .executableTarget(name: "\(name)", dependencies: ["\(name.capitalized)Lib"])
     ]
-
     """
     packageContents.append(contentsOf: newTarget)
     try packageContents.write(toFile: swishDir + "/Package.swift", atomically: true, encoding: .utf8)
@@ -44,26 +42,31 @@ final class AddCommand {
 
   func files(name: String) -> [ScaffoldFile] {
     [
-      ScaffoldFile(directory: "Sources/\(name)", name: "main.swift", contents:
-      #"""
-      import \(name)Lib
-      import Foundation
-
-      let date = try \(name)().fetch()
-      print("The date is \(date).")
-      """#),
-      ScaffoldFile(directory: "Sources/\(name)Lib", name: "\(name).swift", contents:
-      #"""
+      ScaffoldFile(directory: "Sources/\(name)",
+                   name: "main.swift",
+                   contents:
+        """
+        import \(name.capitalized)Lib
+        
+        let date = try \(name.capitalized)().fetch()
+        """ +
+        #"print("The date is \(date).")"#
+      ),
+      ScaffoldFile(directory: "Sources/\(name)Lib",
+                   name: "\(name).swift",
+                   contents:
+      """
       import Sh
       import Foundation
 
-      public struct \(name) {
+      public struct \(name.capitalized) {
+        public init() {}
         public func fetchFromShell() throws -> Date {
           let timeInterval = try sh(TimeInterval.self, "date +%s")
           return Date(timeIntervalSince1970: timeInterval)
         }
       }
-      """#),
+      """),
     ]
   }
 }

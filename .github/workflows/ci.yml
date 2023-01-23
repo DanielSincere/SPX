@@ -41,7 +41,7 @@ jobs:
         run: $(swift build -c release --show-bin-path)/swish --init
 
       - name: "test: add"
-        run: $(swift build -c release --show-bin-path)/swish --add Date2
+        run: $(swift build -c release --show-bin-path)/swish --add date2
 
       - uses: actions/upload-artifact@v3
         with:
@@ -49,7 +49,7 @@ jobs:
           path: Swish
 
       - name: "test: run"
-        run: $(swift build -c release --show-bin-path)/swish Date2
+        run: $(swift build -c release --show-bin-path)/swish date2
 
       - name: "test: build"
         run: $(swift build -c release --show-bin-path)/swish --build

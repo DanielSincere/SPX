@@ -28,7 +28,7 @@ final class AddCommand {
     """
 
     package.targets += [
-      .target(name: "\(name)Lib", dependencies: ["Sh"])
+      .target(name: "\(name)Lib", dependencies: ["Sh"]),
       .executableTarget(name: "\(name)", dependencies: ["\(name)Lib"])
     ]
 

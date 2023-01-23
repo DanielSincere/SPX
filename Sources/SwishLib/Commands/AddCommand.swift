@@ -26,6 +26,7 @@ final class AddCommand {
     var packageContents = try String(contentsOfFile: swishDir + "/Package.swift")
     let newTarget =
     """
+
     package.targets += [
       .target(name: "\(name.capitalized)Lib", dependencies: ["Sh"]),
       .executableTarget(name: "\(name)", dependencies: ["\(name.capitalized)Lib"])
@@ -47,7 +48,7 @@ final class AddCommand {
                    contents:
         """
         import \(name.capitalized)Lib
-        
+
         let date = try \(name.capitalized)().fetch()
         """ +
         #"print("The date is \(date).")"#

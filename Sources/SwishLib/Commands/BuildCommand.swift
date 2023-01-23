@@ -13,6 +13,7 @@ final class BuildCommand {
     announcer?.building(path: swishDir)
     do {
       try self.removeBuildDir()
+      try runner.exec(cmd: "swift package --package-path \(swishDir) resolve")
       try runner.exec(cmd: "swift build --package-path \(swishDir)")
     } catch {
       throw Errors.build(error: error)

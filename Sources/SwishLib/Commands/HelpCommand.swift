@@ -11,7 +11,7 @@ final class HelpCommand {
     """
     Swish \(version)
 
-    Regular use:
+    \("Regular use".bold)
 
     \("swish".cyan) \("<target-name>".yellow) [arguments...]
 
@@ -21,7 +21,7 @@ final class HelpCommand {
                                  directory.
     - [arguments...]  Remaining arguments passed to the target
 
-    Available commands:
+    \("Available commands".bold)
 
     \("swish".cyan) \("with no arguments".lightBlack)
         list the available targets
@@ -47,6 +47,8 @@ final class HelpCommand {
 
     \("swish".cyan) \("--build".cyan), -b
         update & build the scripts package, as a convenience.
+    
+    Learn more at \("https://github.com/FullQueueDeveloper/Swish".green)
     
     """
     .data(using: .utf8)

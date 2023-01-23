@@ -27,14 +27,7 @@ struct SwiftPackageDescription: Decodable {
     return try runner.parseSwiftPackage(cmd: "swift package --package-path \(swishDir) dump-package")
   }
 
-  enum Errors: Error, LocalizedError {
+  enum Errors: Error {
     case couldNotFindPackageDotSwift(path: String)
-
-    var errorDescription: String? {
-      switch self {
-      case .couldNotFindPackageDotSwift(path: let path):
-        return "Could not find `Package.swift` at `\(path)`"
-      }
-    }
   }
 }

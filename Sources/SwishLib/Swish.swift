@@ -18,8 +18,19 @@ public struct Swish {
 
   private func parse(arguments: Array<String>, swishDir: String) throws {
     if 0 == arguments.count {
-      try ListCommand(announcer: announcer, runner: Runner(), swishDir: swishDir)
+      do {
+        try ListCommand(announcer: announcer,
+                        runner: Runner(),
+                        swishDir: swishDir)
         .exec()
+      } catch {
+        announcer.error(error)
+        
+        HelpCommand(swishDir: swishDir)
+          .exec()
+   
+        exit(EXIT_FAILURE)
+      }
 
     } else if 1 <= arguments.count {
       switch arguments[0] {

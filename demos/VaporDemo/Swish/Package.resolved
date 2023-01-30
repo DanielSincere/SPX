@@ -9,6 +9,15 @@
           "revision": "e0dada9cd44e3fa7ec3b867e49a8ddbf543e3df3",
           "version": "4.0.1"
         }
+      },
+      {
+        "package": "Sh",
+        "repositoryURL": "https://github.com/FullQueueDeveloper/Sh.git",
+        "state": {
+          "branch": null,
+          "revision": "a40bba19d8085761e051fa1f0d5937259fa2e17a",
+          "version": "1.2.0"
+        }
       }
     ]
   },

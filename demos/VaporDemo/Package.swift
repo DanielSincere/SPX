@@ -1,11 +1,11 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 
 import PackageDescription
 
 let package = Package(
   name: "VaporDemo",
   platforms: [.macOS(.v12)],
-  
+
   dependencies: [
     .package(url: "https://github.com/vapor/vapor.git", from: "4.55.0"),
   ],
@@ -13,14 +13,14 @@ let package = Package(
     .executableTarget(name: "Run",
       dependencies: [
         .target(name: "App"),
-      ]    
+      ]
     ),
     .target(name: "App",
       dependencies: [
-        .product(name: "Vapor", package: "vapor"),  
+        .product(name: "Vapor", package: "vapor"),
       ]
     ),
-    .testTarget(name: "AppTests", 
+    .testTarget(name: "AppTests",
       dependencies: [
         .target(name: "App"),
         .product(name: "XCTVapor", package: "vapor"),

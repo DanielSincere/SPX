@@ -1,4 +1,4 @@
-FROM --platform=linux/x86-64 index.docker.io/library/swift:5.6-focal as builder
+FROM --platform=linux/x86-64 index.docker.io/library/swift:5.7-focal as builder
 WORKDIR /src
 COPY ./Package.* ./
 COPY ./Sources ./Sources
@@ -7,7 +7,7 @@ RUN swift build -c release --arch x86_64 -Xswiftc -g
 RUN mkdir /output
 RUN cp $(swift build -c release --arch x86_64 -Xswiftc -g --show-bin-path)/Run /output/Run
 
-FROM index.docker.io/library/swift:5.6-focal-slim as prod_base
+FROM index.docker.io/library/swift:5.7-focal-slim as prod_base
 RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app vapor
 WORKDIR /app
 COPY --from=builder --chown=vapor:vapor /output/* /app

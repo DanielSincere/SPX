@@ -8,73 +8,29 @@ final class InitCommand {
     self.swishDir = swishDir
   }
 
-  func exec() throws {
+  func exec(arguments: Array<String>) throws {
+    if arguments.count < 1 {
+      throw Errors.templateNameMissing
+    }
 
-    announcer?.scaffolding(path: swishDir)
+    guard let template  = Templates(rawValue: arguments[0]) else {
+      throw Errors.noTemplate(named: arguments[0])
+    }
 
-    for file in files {
-      let fullPath = try file.create(in: swishDir)
+    try self.exec(template: template)
+  }
+
+  func exec(template: Templates) throws {
+    announcer?.scaffolding(template: template, path: ".")
+
+    for file in template.files {
+      let fullPath = try file.create(in: ".")
       announcer?.fileCreated(path: fullPath)
     }
   }
 
-  private var files: [ScaffoldFile] {
-    [
-      .init(directory: "Sources/date", name: "main.swift", contents:
-        #"""
-        import DateLib
-        import Foundation
-
-        let date = try fetchDateFromShell()
-        print("The date is \(date).")
-        """#
-      ),
-      .init(directory: "Sources/DateLib", name: "fetchDateFromShell.swift", contents:
-        #"""
-        import Sh
-        import Foundation
-
-        public func fetchDateFromShell() throws -> Date {
-          let timeInterval = try sh(TimeInterval.self, "date +%s")
-          let date = Date(timeIntervalSince1970: timeInterval)
-          return date
-        }
-
-        """#
-      ),
-      .init(directory: nil, name: "Package.swift", contents:
-        """
-        // swift-tools-version:5.7
-
-        import PackageDescription
-
-        let package = Package(
-          name: "Scripts",
-          platforms: [.macOS(.v12)],
-          products: [
-            .executable(name: "date", targets: ["date"]),
-          ],
-          dependencies: [
-            .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.0.0"),
-          ],
-          targets: [
-            .executableTarget(
-              name: "date",
-              dependencies: ["DateLib"]),
-            .target(
-              name: "DateLib",
-              dependencies: ["Sh"]),
-          ]
-        )
-        """
-      ),
-      .init(directory: nil, name: ".gitignore", contents:
-        """
-        .build
-        .DS_Store
-        .swiftpm
-        """
-      )
-    ]
+  enum Errors: Error {
+    case templateNameMissing
+    case noTemplate(named: String)
   }
 }

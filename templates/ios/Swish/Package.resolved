@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "rainbow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Rainbow",
+      "state" : {
+        "revision" : "e0dada9cd44e3fa7ec3b867e49a8ddbf543e3df3",
+        "version" : "4.0.1"
+      }
+    },
+    {
+      "identity" : "sh",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/Sh.git",
+      "state" : {
+        "revision" : "a40bba19d8085761e051fa1f0d5937259fa2e17a",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "shxcrun",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/ShXcrun.git",
+      "state" : {
+        "revision" : "c84151a8c208de50f7ac5f3bcd096a538b4e120d",
+        "version" : "0.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -43,7 +43,7 @@ And then add `.build/release/` to your `$PATH`.
 
 ## Getting started
 
-    swish --init
+    swish --init simple
 
 Will scaffold a new Swish project in the `swish` subdirectory of your current working directory. This is what it will look like.
 
@@ -54,7 +54,6 @@ Will scaffold a new Swish project in the `swish` subdirectory of your current wo
           +- Package.swift
           +- .gitignore
           +- Sources/date/main.swift
-          +- Sources/DateLib/fetchDateFromShell.swift
 
 Then you can run `swish` or `swish --list` to see the current executable targets. Then you can run `swish date` to run the simple sample script named `date`.
 
@@ -84,10 +83,10 @@ Then you can run `swish` or `swish --list` to see the current executable targets
     swish --help
         show this message
 
-    swish --init
+    swish --init <template-name>
         scaffold a new Swish scripts subdirectory in
         the current directory. The default scripts
-        subdirectory is `scripts`
+        subdirectory is `Swish`.
 
     swish --add <name>
         add a new script named <name> by
@@ -102,6 +101,12 @@ Then you can run `swish` or `swish --list` to see the current executable targets
 
 I recommend using the old style of Swift targets, an executable target and a regular target for each script. I recommend the executable target depends only on the regular target. And the regular target is free to depend on external dependencies. Otherwise, in my experience, the package will fail to build about 50% of the time, even with Swift 5.7 on macOS 12 with Xcode 14.
 
+## iOS template
+
+    swish -i ios
+
+This will create a Swish directory with a script to generate an app icon from an SVG (`swish appicon`) and a script to push to the App Store (`swish appstore`). Read more about it at [templates/ios/Swish/README.md](templates/ios/Swish/README.md)
+
 ## Demos
 
 There is an example project in the `demos` folder
@@ -111,3 +116,5 @@ There is an example project in the `demos` folder
 - Screenshots. This PR shows the power of using Swish & Swift for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
 
 - Demo iOS project https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+
+

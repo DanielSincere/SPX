@@ -43,8 +43,9 @@ public struct Swish {
           .exec()
 
       case "--init", "-i":
+        let arguments = Array(arguments.dropFirst())
         try InitCommand(announcer: announcer, swishDir: swishDir)
-          .exec()
+          .exec(arguments: arguments)
 
       case "--list", "-l":
         try ListCommand(announcer: announcer, runner: Runner(), swishDir: swishDir)

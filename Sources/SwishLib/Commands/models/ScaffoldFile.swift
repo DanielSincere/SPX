@@ -9,9 +9,16 @@ struct ScaffoldFile {
   func create(in path: String) throws -> String {
     let directory = self.directory(for: path)
     let fullPath = directory + "/" + self.name
-    let data = self.contents.data(using: .utf8)!
+
+
     try FileManager.default.createDirectory(atPath: directory, withIntermediateDirectories: true)
-    FileManager.default.createFile(atPath: fullPath, contents: data)
+
+
+    let nsstring = NSString(string: self.contents)
+    try nsstring.write(toFile: fullPath,
+                       atomically: true,
+                       encoding: String.Encoding.utf8.rawValue)
+
     return fullPath
   }
 

@@ -22,8 +22,8 @@ struct Announcer {
     }
   }
 
-  func scaffolding(path: String) {
-    self.announce("Scaffolding in folder `\(path)`")
+  func scaffolding(template: Templates, path: String) {
+    self.announce("Scaffolding template \(template.rawValue.cyan) in folder `\(path)`")
   }
 
   func building(path: String) {

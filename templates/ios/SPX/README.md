@@ -1,6 +1,6 @@
-# iOS Swish Scripts
+# iOS SPX Scripts
 
-These are some scripts for managing your iOS project. Included in this template are a script to generate an app icon from an SVG (`swish appicon`) and a script to push to the App Store (`swish appstore`).
+These are some scripts for managing your iOS project. Included in this template are a script to generate an app icon from an SVG (`spx appicon`) and a script to push to the App Store (`spx appstore`).
 
 ## App Store
 
@@ -18,6 +18,6 @@ Be sure to also update the scheme that is built. By default this is `App`. You m
 
 ## App icon
 
-This script uses the SVG at `Swish/AppIcon.svg` by default. You may want to use a different SVG, but this will be useful for pushing to TestFlight.
+This script uses the SVG at `SPX/AppIcon.svg` by default. You may want to use a different SVG, but this will be useful for pushing to TestFlight.
 
 You may also want to update the output directory to something that makes sense to you. By default, it outputs an `AppIcon.xcassets` to a directory name `App`.

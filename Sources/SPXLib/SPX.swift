@@ -5,7 +5,7 @@ public struct SPX {
   let announcer = Announcer()
 
   public init() {}
-  
+
   public func run(_ arguments: [String]) {
     do {
       let defaultScriptsDir = "SPX"
@@ -25,10 +25,10 @@ public struct SPX {
         .exec()
       } catch {
         announcer.error(error)
-        
+
         HelpCommand(spxDir: spxDir)
           .exec()
-   
+
         exit(EXIT_FAILURE)
       }
 
@@ -36,7 +36,7 @@ public struct SPX {
       switch arguments[0] {
 
       case "--version", "-v":
-        print("Swish \(version)")
+        print("SPX \(version)")
 
       case "--help", "-h", "-?":
         HelpCommand(spxDir: spxDir)
@@ -59,7 +59,7 @@ public struct SPX {
         let arguments = Array(arguments.dropFirst())
         try AddCommand(announcer: announcer, spxDir: spxDir)
           .exec(arguments: arguments)
-      
+
       default:
         let targetName = arguments[0]
         let targetArguments = arguments.dropFirst()

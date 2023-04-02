@@ -1,11 +1,11 @@
 extension Templates {
   static let iosFiles: [ScaffoldFile] = [
-    ScaffoldFile(directory: "Swish",
+    ScaffoldFile(directory: "SPX",
              name: "README.md",
              contents: #"""
-# iOS Swish Scripts
+# iOS SPX Scripts
 
-These are some scripts for managing your iOS project. Included in this template are a script to generate an app icon from an SVG (`swish appicon`) and a script to push to the App Store (`swish appstore`).
+These are some scripts for managing your iOS project. Included in this template are a script to generate an app icon from an SVG (`spx appicon`) and a script to push to the App Store (`spx appstore`).
 
 ## App Store
 
@@ -16,19 +16,18 @@ By default, it expects some environment variables, but of course feel free to ge
 - `APPLE_TEAM_ID` your development team ID in App Store Connect
 - `APPLE_API_KEY_ID` your API Key ID from App Store Connect
 - `APPLE_API_ISSUER_ID` your Issuer ID from App Store Connect
-
 You could also use other kinds of credentials for uploading to the App Store, such as username and password, using [LiteralPasswordCredential](https://github.com/FullQueueDeveloper/ShXcrun/blob/trunk/Sources/ShXcrun/Altool/Credential/LiteralPasswordCredential.swift). This will require generate an app-specific password at https://appleid.apple.com.
 
 Be sure to also update the scheme that is built. By default this is `App`. You may also want to update the script if you need to specify a project or workspace to `xcodebuild`.
 
 ## App icon
 
-This script uses the SVG at `Swish/AppIcon.svg` by default. You may want to use a different SVG, but this will be useful for pushing to TestFlight.
+This script uses the SVG at `SPX/AppIcon.svg` by default. You may want to use a different SVG, but this will be useful for pushing to TestFlight.
 
 You may also want to update the output directory to something that makes sense to you. By default, it outputs an `AppIcon.xcassets` to a directory name `App`.
 
 """#),
-ScaffoldFile(directory: "Swish",
+ScaffoldFile(directory: "SPX",
              name: "Package.resolved",
              contents: #"""
 {
@@ -65,7 +64,7 @@ ScaffoldFile(directory: "Swish",
 }
 
 """#),
-ScaffoldFile(directory: "Swish",
+ScaffoldFile(directory: "SPX",
              name: ".gitignore",
              contents: #"""
 .DS_Store
@@ -73,7 +72,7 @@ ScaffoldFile(directory: "Swish",
 .build
 
 """#),
-ScaffoldFile(directory: "Swish",
+ScaffoldFile(directory: "SPX",
              name: "Package.swift",
              contents: #"""
 // swift-tools-version: 5.7
@@ -81,7 +80,7 @@ ScaffoldFile(directory: "Swish",
 import PackageDescription
 
 let package = Package(
-  name: "SwishScripts",
+  name: "SPXScripts",
   platforms: [
     .macOS(.v12),
   ],
@@ -101,7 +100,7 @@ let package = Package(
 )
 
 """#),
-ScaffoldFile(directory: "Swish/Sources/appstore",
+ScaffoldFile(directory: "SPX/Sources/appstore",
              name: "AppStoreMain.swift",
              contents: #"""
 import Sh
@@ -139,7 +138,7 @@ extension FileManager {
 }
 
 """#),
-ScaffoldFile(directory: "Swish/Sources/appstore",
+ScaffoldFile(directory: "SPX/Sources/appstore",
              name: "Secrets.swift",
              contents: #"""
 import Foundation
@@ -167,7 +166,7 @@ enum Secrets: String {
 }
 
 """#),
-ScaffoldFile(directory: "Swish/Sources/appstore",
+ScaffoldFile(directory: "SPX/Sources/appstore",
              name: "AppStore.swift",
              contents: #"""
 import Foundation
@@ -225,17 +224,17 @@ struct AppStore {
 
 
 """#),
-ScaffoldFile(directory: "Swish/Sources/appicon",
+ScaffoldFile(directory: "SPX/Sources/appicon",
              name: "main.swift",
              contents: #"""
 import SwishXCAssets
 
-let svgPath = "Swish/AppIcon.svg"
+let svgPath = "SPX/AppIcon.svg"
 try await AppIcon(inputSVG: svgPath, outputDir: "App")
   .render(platforms: [.iPhone, .iPad])
 
 """#),
-ScaffoldFile(directory: "Swish",
+ScaffoldFile(directory: "SPX",
              name: "AppIcon.svg",
              contents: #"""
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>

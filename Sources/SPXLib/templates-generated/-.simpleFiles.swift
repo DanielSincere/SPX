@@ -1,6 +1,6 @@
 extension Templates {
   static let simpleFiles: [ScaffoldFile] = [
-    ScaffoldFile(directory: "Swish",
+    ScaffoldFile(directory: "SPX",
              name: "Package.resolved",
              contents: #"""
 {
@@ -28,7 +28,7 @@ extension Templates {
 }
 
 """#),
-ScaffoldFile(directory: "Swish",
+ScaffoldFile(directory: "SPX",
              name: ".gitignore",
              contents: #"""
 .DS_Store
@@ -36,7 +36,7 @@ ScaffoldFile(directory: "Swish",
 .build
 
 """#),
-ScaffoldFile(directory: "Swish",
+ScaffoldFile(directory: "SPX",
              name: "Package.swift",
              contents: #"""
 // swift-tools-version: 5.7
@@ -44,7 +44,7 @@ ScaffoldFile(directory: "Swish",
 import PackageDescription
 
 let package = Package(
-  name: "SwishScripts",
+  name: "SPXScripts",
   platforms: [
     .macOS(.v12),
   ],
@@ -59,7 +59,7 @@ let package = Package(
 )
 
 """#),
-ScaffoldFile(directory: "Swish/Sources/date",
+ScaffoldFile(directory: "SPX/Sources/date",
              name: "main.swift",
              contents: #"""
 import Sh

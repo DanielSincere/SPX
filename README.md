@@ -84,9 +84,9 @@ Then you can run `spx` or `spx --list` or `spx -l` to see the current executable
         show this message
 
     spx --init <template-name>
-        scaffold a new Swish scripts subdirectory in
+        scaffold a new SPX scripts subdirectory in
         the current directory. The default scripts
-        subdirectory is `Swish`.
+        subdirectory is `SPX`.
 
     spx --add <name>
         add a new script named <name> by

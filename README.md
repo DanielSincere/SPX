@@ -4,7 +4,7 @@ SPX is a Swift script running tool. Easily run Swift packages in a supporting re
 
 SPX pairs nicely with [Sh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
 
-For a full example of using Swish, [Sh](https://github.com/FullQueueDeveloper/Sh), and [ShXcrun](https://github.com/FullQueueDeveloper/ShXcrun) on your iOS project, please see https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+For a full example of using SPX, [Sh](https://github.com/FullQueueDeveloper/Sh), and [ShXcrun](https://github.com/FullQueueDeveloper/ShXcrun) on your iOS project, please see https://github.com/FullQueueDeveloper/SwishExampleiOSProject
 
 ## Motivation
 
@@ -36,16 +36,16 @@ Install with [Mint](https://github.com/yonaskolb/Mint)
 ### Manual
 
     git clone https://github.com/FullQueueDeveloper/SPX.git
-    cd swish
+    cd SPX
     swift build -c release
 
 And then add `.build/release/` to your `$PATH`.
 
 ## Getting started
 
-    swish --init simple
+    spx --init simple
 
-Will scaffold a new Swish project in the `swish` subdirectory of your current working directory. This is what it will look like.
+Will scaffold a new SPX project in the `SPX` subdirectory of your current working directory. This is what it will look like.
 
     $PWD
      |
@@ -101,14 +101,14 @@ Then you can run `spx` or `spx --list` or `spx -l` to see the current executable
 
     spx -i ios
 
-This will create a Swish directory with a script to generate an app icon from an SVG (`swish appicon`) and a script to push to the App Store (`swish appstore`). Read more about it at [templates/ios/Swish/README.md](templates/ios/Swish/README.md)
+This will create a `SPX` directory with a script to generate an app icon from an SVG (`spx appicon`) and a script to push to the App Store (`spx appstore`). Read more about it at [templates/ios/SPX/README.md](templates/ios/SPX/README.md)
 
 ## Demos
 
 There is an example project in the `demos` folder
 
-- The `VaporDemo` is a [Vapor](https://vapor.codes) app. This example is short, but still meaningful. Running `swish docker` from the `demos/VaporDemo` directory will build the docker container for this small vapor app.
+- The `VaporDemo` is a [Vapor](https://vapor.codes) app. This example is short, but still meaningful. Running `spx docker` from the `demos/VaporDemo` directory will build the docker container for this small vapor app.
 
-- Screenshots. This PR shows the power of using Swish & SPX for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
+- Screenshots. This PR shows the power of using Sh & SPX for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
 
 - Demo iOS project https://github.com/FullQueueDeveloper/SwishExampleiOSProject

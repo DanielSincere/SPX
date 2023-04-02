@@ -38,14 +38,14 @@ struct Announcer {
 private extension Announcer {
 
   func announce(_ text: String) {
-    ("[Swish] ".cyan + text.yellow + "\n")
+    ("[SPX] ".cyan + text.yellow + "\n")
       .data(using: .utf8)
       .map(FileHandle.standardError.write)
   }
 
   func announce(_ error: Error) {
 
-    ("[Swish] ".cyan + error.localizedDescription.red + "\n")
+    ("[SPX] ".cyan + error.localizedDescription.red + "\n")
       .data(using: .utf8)
       .map(FileHandle.standardError.write)
 

@@ -91,7 +91,7 @@ struct GenerateMain {
                                     name: name.string,
                                     contents: contents))
         } catch {
-          print("could not open \(path)", error.localizedDescription)
+          print("could not open \(filePath)", error.localizedDescription)
         }
       }
 

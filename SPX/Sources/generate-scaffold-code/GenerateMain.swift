@@ -1,6 +1,6 @@
 import Foundation
 import Sh
-import System
+import SystemPackage
 
 @main
 struct GenerateMain {

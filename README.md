@@ -24,8 +24,12 @@ SPX is currently available through [Homebrew](https://brew.sh), [Mint](https://g
 
 Install with [Homebrew](https://brew.sh)
 
-    brew tap fullqueuedeveloper/fullqueuedeveloper
-    brew install spx
+    brew install fullqueuedeveloper/fullqueuedeveloper/spx
+    
+Or if using a `Brewfile`, add these lines to it
+
+    tap "fullqueuedeveloper/fullqueuedeveloper"
+    brew "spx"
 
 ### Mint
 

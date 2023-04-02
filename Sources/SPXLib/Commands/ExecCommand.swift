@@ -2,15 +2,15 @@ import Foundation
 
 final class ExecCommand {
 
-  let announcer: Announcer?, runner: Running, swishDir: String
-  init(announcer: Announcer?, runner: Running, swishDir: String) {
+  let announcer: Announcer?, runner: Running, spxDir: String
+  init(announcer: Announcer?, runner: Running, spxDir: String) {
     self.runner = runner
     self.announcer = announcer
-    self.swishDir = swishDir
+    self.spxDir = spxDir
   }
 
   func exec(targetName: String, targetArguments: Array<String>) throws {
-    let package = try SwiftPackageDescription.discover(runner: runner, swishDir: swishDir)
+    let package = try SwiftPackageDescription.discover(runner: runner, spxDir: spxDir)
     let targetNames = package.executableTargets.map { $0.name }
 
     guard targetNames.contains(targetName) else {
@@ -19,7 +19,7 @@ final class ExecCommand {
 
     announcer?.running(target: targetName)
 
-    var cmd = "swift run --package-path \(swishDir) \(targetName)"
+    var cmd = "swift run --package-path \(spxDir) \(targetName)"
     if !targetArguments.isEmpty {
       cmd += " \(targetArguments.joined(separator: " "))"
     }

@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-  name: "Swish",
+  name: "SPX",
   platforms: [
     .macOS(.v12),
   ],
   products: [
-    .executable(name: "swish", targets: ["swish"]),
+    .executable(name: "spx", targets: ["spx"]),
   ],
   dependencies: [
     .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.0"),
@@ -16,14 +16,14 @@ let package = Package(
   ],
   targets: [
     .executableTarget(
-      name: "swish",
-      dependencies: ["SwishLib"]),
+      name: "spx",
+      dependencies: ["SPXLib"]),
     .target(
-      name: "SwishLib",
+      name: "SPXLib",
       dependencies: ["Sh", "Rainbow"]),
     .testTarget(
-      name: "SwishTests",
-      dependencies: ["SwishLib"],
+      name: "SPXTests",
+      dependencies: ["SPXLib"],
       resources: [
         .copy("Fixtures"),
       ]),

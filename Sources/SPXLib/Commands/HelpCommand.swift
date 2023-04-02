@@ -2,54 +2,54 @@ import Foundation
 
 final class HelpCommand {
 
-  let swishDir: String
-  init(swishDir: String) {
-    self.swishDir = swishDir
+  let spxDir: String
+  init(spxDir: String) {
+    self.spxDir = spxDir
   }
 
   func exec() {
     """
-    Swish \(version)
+    SPX \(version)
 
     \("Regular use".bold)
 
-    \("swish".cyan) \("<target-name>".yellow) [arguments...]
+    \("spx".cyan) \("<target-name>".yellow) [arguments...]
 
     - \("<target-name>".yellow)  The name of the `executableTarget` in the
-                                 `Package.swift` in the `\(swishDir)`
+                                 `Package.swift` in the `\(spxDir)`
                                  subdirectory of the current working
                                  directory.
     - [arguments...]  Remaining arguments passed to the target
 
     \("Available commands".bold)
 
-    \("swish".cyan) \("with no arguments".lightBlack)
+    \("spx".cyan) \("with no arguments".lightBlack)
         list the available targets
 
-    \("swish".cyan) \("--list".cyan), -l
+    \("spx".cyan) \("--list".cyan), -l
         list the available targets
 
-    \("swish --version".cyan), -v
+    \("spx --version".cyan), -v
         show version and exit
 
-    \("swish --help".cyan), -h
+    \("spx --help".cyan), -h
         show this message
 
-    \("swish".cyan) \("--init".cyan), -i
-        scaffold a new `Swish` project subdirectory
+    \("spx".cyan) \("--init".cyan), -i
+        scaffold a new `SPX` project subdirectory
         in the current directory. The default
-        subdirectory name is `\(swishDir.bold)`
+        subdirectory name is `\(spxDir.bold)`
 
-    \("swish".cyan) \("--add".cyan) \("<name>".yellow), -a
+    \("spx".cyan) \("--add".cyan) \("<name>".yellow), -a
         add a new script named `\("<name>".yellow)` by
         creating a file at path `\("Sources/<name>/main.swift".yellow)`
         & a file at path `\("Sources/<Name>Lib/<Name>.swift".yellow)`,
         & adding a their targets to `Package.swift`
 
-    \("swish".cyan) \("--build".cyan), -b
+    \("spx".cyan) \("--build".cyan), -b
         update & build the scripts package, as a convenience.
 
-    Learn more at \("https://github.com/FullQueueDeveloper/Swish".green)
+    Learn more at \("https://github.com/FullQueueDeveloper/SPX".green)
 
     """
     .data(using: .utf8)

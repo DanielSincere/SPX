@@ -1,5 +1,5 @@
 import XCTest
-@testable import SwishLib
+@testable import SPXLib
 
 final class BuildCommandTests: XCTestCase {
 
@@ -8,7 +8,7 @@ final class BuildCommandTests: XCTestCase {
 
     let fakeRunner = FakeRunner()
 
-    try BuildCommand(announcer: nil, runner: fakeRunner, swishDir: dir)
+    try BuildCommand(announcer: nil, runner: fakeRunner, spxDir: dir)
       .exec()
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)

@@ -2,10 +2,10 @@ import Foundation
 
 final class AddCommand {
 
-  let announcer: Announcer?, swishDir: String
-  init(announcer: Announcer?, swishDir: String) {
+  let announcer: Announcer?, spxDir: String
+  init(announcer: Announcer?, spxDir: String) {
     self.announcer = announcer
-    self.swishDir = swishDir
+    self.spxDir = spxDir
   }
 
   func exec(arguments: Array<String>) throws {
@@ -19,11 +19,11 @@ final class AddCommand {
   func exec(name: String) throws {
 
     for file in self.files(name: name) {
-      let fullPath = try file.create(in: swishDir)
+      let fullPath = try file.create(in: spxDir)
       announcer?.fileCreated(path: fullPath)
     }
 
-    var packageContents = try String(contentsOfFile: swishDir + "/Package.swift")
+    var packageContents = try String(contentsOfFile: spxDir + "/Package.swift")
     let newTarget =
     """
 
@@ -33,8 +33,8 @@ final class AddCommand {
     ]
     """
     packageContents.append(contentsOf: newTarget)
-    try packageContents.write(toFile: swishDir + "/Package.swift", atomically: true, encoding: .utf8)
-    announcer?.fileModified(path: swishDir + "/Package.swift")
+    try packageContents.write(toFile: spxDir + "/Package.swift", atomically: true, encoding: .utf8)
+    announcer?.fileModified(path: spxDir + "/Package.swift")
   }
 
   enum Errors: Error {

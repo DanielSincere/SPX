@@ -2,10 +2,10 @@ import Foundation
 
 final class InitCommand {
 
-  let announcer: Announcer?, swishDir: String
-  init(announcer: Announcer?, swishDir: String) {
+  let announcer: Announcer?, spxDir: String
+  init(announcer: Announcer?, spxDir: String) {
     self.announcer = announcer
-    self.swishDir = swishDir
+    self.spxDir = spxDir
   }
 
   func exec(arguments: Array<String>) throws {

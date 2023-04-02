@@ -1,5 +1,5 @@
 import XCTest
-@testable import SwishLib
+@testable import SPXLib
 
 final class ExecCommandTests: XCTestCase {
 
@@ -8,7 +8,7 @@ final class ExecCommandTests: XCTestCase {
     let dir = Fixtures.singleTargetFixture.dir
 
     let fakeRunner = ParsingFakeRunner()
-    try ExecCommand(announcer: nil, runner: fakeRunner, swishDir: dir).exec(targetName: "example", targetArguments: [])
+    try ExecCommand(announcer: nil, runner: fakeRunner, spxDir: dir).exec(targetName: "example", targetArguments: [])
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)
     XCTAssertEqual(fakeRunner.receivedCommands.first, "swift run --package-path \(dir) example")
@@ -19,7 +19,7 @@ final class ExecCommandTests: XCTestCase {
     let dir = Fixtures.singleTargetFixture.dir
 
     let fakeRunner = ParsingFakeRunner()
-    try ExecCommand(announcer: nil, runner: fakeRunner, swishDir: dir).exec(targetName: "example", targetArguments: ["a", "b", "c"])
+    try ExecCommand(announcer: nil, runner: fakeRunner, spxDir: dir).exec(targetName: "example", targetArguments: ["a", "b", "c"])
 
     XCTAssertEqual(fakeRunner.receivedCommands.count, 1)
     XCTAssertEqual(fakeRunner.receivedCommands.first, "swift run --package-path \(dir) example a b c")

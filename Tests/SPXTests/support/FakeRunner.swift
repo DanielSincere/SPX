@@ -1,4 +1,4 @@
-@testable import SwishLib
+@testable import SPXLib
 
 final class FakeRunner: Running {
  

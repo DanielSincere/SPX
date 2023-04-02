@@ -1,5 +1,5 @@
 import XCTest
-@testable import SwishLib
+@testable import SPXLib
 
 final class ListCommandTests: XCTestCase {
 
@@ -7,7 +7,7 @@ final class ListCommandTests: XCTestCase {
 
     let dir = Fixtures.singleTargetFixture.dir
     let runner = Runner()
-    let targets = try ListCommand(announcer: nil, runner: runner, swishDir: dir)
+    let targets = try ListCommand(announcer: nil, runner: runner, spxDir: dir)
       .exec()
 
     XCTAssertEqual(targets.count, 1)

@@ -1,8 +1,8 @@
-# Swish
+# SPX
 
-Swish is a Swift script running tool. Easily run Swift packages in a supporting relative dir named `Swish`
+SPX is a Swift script running tool. Easily run Swift packages in a supporting relative dir named `SPX`
 
-Swish pairs nicely with [Sh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
+SPX pairs nicely with [Sh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
 
 For a full example of using Swish, [Sh](https://github.com/FullQueueDeveloper/Sh), and [ShXcrun](https://github.com/FullQueueDeveloper/ShXcrun) on your iOS project, please see https://github.com/FullQueueDeveloper/SwishExampleiOSProject
 
@@ -18,24 +18,24 @@ This is all doable. And this becomes repetitive across multiple projects.
 
 ## Installation
 
-Swish is currently available through [Homebrew](https://brew.sh), [Mint](https://github.com/yonaskolb/Mint), or manual installation.
+SPX is currently available through [Homebrew](https://brew.sh), [Mint](https://github.com/yonaskolb/Mint), or manual installation.
 
 ### Homebrew
 
 Install with [Homebrew](https://brew.sh)
 
-    brew tap fullqueuedeveloper/swish
-    brew install fullqueuedeveloper/swish/swish
+    brew tap fullqueuedeveloper/fullqueuedeveloper
+    brew install fullqueuedeveloper/fullqueuedeveloper/spx
 
 ### Mint
 
 Install with [Mint](https://github.com/yonaskolb/Mint)
 
-    mint install FullQueueDeveloper/Swish
+    mint install FullQueueDeveloper/SPX
 
 ### Manual
 
-    git clone https://github.com/FullQueueDeveloper/Swish.git
+    git clone https://github.com/FullQueueDeveloper/SPX.git
     cd swish
     swift build -c release
 
@@ -49,19 +49,19 @@ Will scaffold a new Swish project in the `swish` subdirectory of your current wo
 
     $PWD
      |
-     +- Swish
+     +- SPX
           |
           +- Package.swift
           +- .gitignore
           +- Sources/date/main.swift
 
-Then you can run `swish` or `swish --list` to see the current executable targets. Then you can run `swish date` to run the simple sample script named `date`.
+Then you can run `spx` or `spx --list` or `spx -l` to see the current executable targets. Then you can run `spx date` to run the simple sample script named `date`.
 
 ## Usage
 
 ### Regular use
 
-    swish <target-name> [arguments...]
+    spx <target-name> [arguments...]
 
     - <target-name>  The name of the `executableTarget` in the
                                 `Package.swift` in the `scripts`
@@ -71,39 +71,35 @@ Then you can run `swish` or `swish --list` to see the current executable targets
 
 ### Available commands
 
-    swish
+    spx
         list the available targets
 
-    swish --list
+    spx --list
         list the available targets
 
-    swish --version
+    spx --version
         show version and exit
 
-    swish --help
+    spx --help
         show this message
 
-    swish --init <template-name>
+    spx --init <template-name>
         scaffold a new Swish scripts subdirectory in
         the current directory. The default scripts
         subdirectory is `Swish`.
 
-    swish --add <name>
+    spx --add <name>
         add a new script named <name> by
         creating a file at path `Sources/<name>/main.swift`,
         & a file at path `Sources/<Name>Lib/<Name>.swift`,
         & adding their targets to `Package.swift`
 
-    swish --build
+    spx --build
         update & build the scripts package, as a convenience.
-
-### Note on package structure
-
-I recommend using the old style of Swift targets, an executable target and a regular target for each script. I recommend the executable target depends only on the regular target. And the regular target is free to depend on external dependencies. Otherwise, in my experience, the package will fail to build about 50% of the time, even with Swift 5.7 on macOS 12 with Xcode 14.
 
 ## iOS template
 
-    swish -i ios
+    spx -i ios
 
 This will create a Swish directory with a script to generate an app icon from an SVG (`swish appicon`) and a script to push to the App Store (`swish appstore`). Read more about it at [templates/ios/Swish/README.md](templates/ios/Swish/README.md)
 
@@ -113,8 +109,6 @@ There is an example project in the `demos` folder
 
 - The `VaporDemo` is a [Vapor](https://vapor.codes) app. This example is short, but still meaningful. Running `swish docker` from the `demos/VaporDemo` directory will build the docker container for this small vapor app.
 
-- Screenshots. This PR shows the power of using Swish & Swift for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
+- Screenshots. This PR shows the power of using Swish & SPX for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
 
 - Demo iOS project https://github.com/FullQueueDeveloper/SwishExampleiOSProject
-
-

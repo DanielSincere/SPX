@@ -18,13 +18,13 @@ struct SwiftPackageDescription: Decodable {
     targets.first(where: { $0.name == name && $0.type == "executable" })
   }
 
-  static func discover(runner: Running, swishDir: String) throws -> Self {
+  static func discover(runner: Running, spxDir: String) throws -> Self {
 
-    guard FileManager.default.isReadableFile(atPath: "\(swishDir)/Package.swift") else {
-      throw Errors.couldNotFindPackageDotSwift(path: "\(swishDir)/Package.swift")
+    guard FileManager.default.isReadableFile(atPath: "\(spxDir)/Package.swift") else {
+      throw Errors.couldNotFindPackageDotSwift(path: "\(spxDir)/Package.swift")
     }
     
-    return try runner.parseSwiftPackage(cmd: "swift package --package-path \(swishDir) dump-package")
+    return try runner.parseSwiftPackage(cmd: "swift package --package-path \(spxDir) dump-package")
   }
 
   enum Errors: Error {

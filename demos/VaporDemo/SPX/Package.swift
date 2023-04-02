@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwishScripts",
+    name: "SPXScripts",
     platforms: [.macOS(.v12)],
     products: [ ],
     dependencies: [

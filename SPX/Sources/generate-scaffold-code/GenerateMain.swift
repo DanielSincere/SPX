@@ -16,11 +16,11 @@ struct GenerateMain {
   }
 
   static func generateTemplateEnum(templates: [String]) throws {
-    try FileManager.default.resetDir(atPath: "Sources/SwishLib/templates-generated/")
+    try FileManager.default.resetDir(atPath: "Sources/SPXLib/templates-generated/")
 
     try sh(.terminal, "rm -fr ./**/.build")
 
-    let path = "Sources/SwishLib/templates-generated/Templates.swift"
+    let path = "Sources/SPXLib/templates-generated/Templates.swift"
     let contents =
     """
     enum Templates: String, CaseIterable {
@@ -39,7 +39,7 @@ struct GenerateMain {
   }
 
   static func writeContentsFile(name: String, files: [ScaffoldFile]) throws {
-    let path = "Sources/SwishLib/templates-generated/-.\(name)Files.swift"
+    let path = "Sources/SPXLib/templates-generated/-.\(name)Files.swift"
     let contents =
     """
     extension Templates {
@@ -91,7 +91,7 @@ struct GenerateMain {
                                     name: name.string,
                                     contents: contents))
         } catch {
-//          print("could not open \(path)", error.localizedDescription)
+          print("could not open \(path)", error.localizedDescription)
         }
       }
 

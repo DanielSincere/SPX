@@ -112,3 +112,12 @@ There is an example project in the `demos` folder
 - Screenshots. This PR shows the power of using Sh & SPX for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
 
 - Demo iOS project https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+
+## Upgrading from Swish
+
+Swish was the previous name of this tool.
+
+1. Rename your `Swish` directories to `SPX`
+2. Untap the previous Homebrew tap: `brew untap fullqueuedeveloper/swish`
+3. Tap the current Homebrew tap: `brew tap fullqueuedeveloper/fullqueuedeveloper`
+4. Install SPX: `brew install spx`

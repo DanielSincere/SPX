@@ -32,45 +32,45 @@ jobs:
         run: swift build -c release
 
       - name: "test: version"
-        run: $(swift build -c release --show-bin-path)/swish --version
+        run: $(swift build -c release --show-bin-path)/spx --version
 
       - name: "test: help"
-        run: $(swift build -c release --show-bin-path)/swish --help
+        run: $(swift build -c release --show-bin-path)/spx --help
 
       - name: "test: init"
-        run: $(swift build -c release --show-bin-path)/swish --init simple
+        run: $(swift build -c release --show-bin-path)/spx --init simple
 
       - name: "test: add"
-        run: $(swift build -c release --show-bin-path)/swish --add date2
+        run: $(swift build -c release --show-bin-path)/spx --add date2
 
       - uses: actions/upload-artifact@v3
         with:
-          name: swish-init-${{ matrix.swift }}-${{ matrix.os }}
-          path: Swish
+          name: spx-init-${{ matrix.swift }}-${{ matrix.os }}
+          path: SPX
 
       - name: "test: run"
-        run: $(swift build -c release --show-bin-path)/swish date2
+        run: $(swift build -c release --show-bin-path)/spx date2
 
       - name: "test: build"
-        run: $(swift build -c release --show-bin-path)/swish --build
+        run: $(swift build -c release --show-bin-path)/spx --build
 
-      - name: "reset swish dir"
-        run: rm -fr Swish
+      - name: "reset spx dir"
+        run: rm -fr SPX
 
       - name: "template ios - scaffold"
-        run: $(swift build -c release --show-bin-path)/swish -i ios
+        run: $(swift build -c release --show-bin-path)/spx -i ios
 
       - name: "template ios - build"
-        run: $(swift build -c release --show-bin-path)/swish --build
+        run: $(swift build -c release --show-bin-path)/spx --build
         if: ${{ matrix.os == 'macos-12' }}
 
       - name: "template ios - generate app icon"
-        run: $(swift build -c release --show-bin-path)/swish appicon
+        run: $(swift build -c release --show-bin-path)/spx appicon
         if: ${{ matrix.os == 'macos-12' }}
 
       - name: "demo: build container"
-        run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/swish docker
+        run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx docker
         if: ${{ matrix.os != 'macos-12' }}
 
       - name: "demo: update and test"
-        run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/swish UpdateAndTest
+        run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx UpdateAndTest

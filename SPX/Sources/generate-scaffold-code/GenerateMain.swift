@@ -113,12 +113,12 @@ extension String {
 
   var asURL: URL {
     #if os(Linux)
-      return URL(fileURLWithPath: self.string)
+      return URL(fileURLWithPath: self)
     #else
     if #available(macOS 13.0, *) {
       return URL(filePath: self)
     } else {
-      return URL(fileURLWithPath: self.string)
+      return URL(fileURLWithPath: self)
     }
     #endif
   }

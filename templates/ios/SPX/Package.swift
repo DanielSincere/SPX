@@ -19,7 +19,14 @@ let package = Package(
   targets: [
     .executableTarget(
       name: "appstore",
-      dependencies: ["Sh", "ShXcrun"]),
+      dependencies: [
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
+        "ShXcrun",
+        "ShGit",
+        "Sh",
+        "DotEnv",
+        "Version"
+    ]),
     .executableTarget(
       name: "appicon",
       dependencies: ["SwishXCAssets"]),

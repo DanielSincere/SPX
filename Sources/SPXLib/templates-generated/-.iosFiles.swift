@@ -43,6 +43,24 @@ ScaffoldFile(directory: "SPX",
 {
   "pins" : [
     {
+      "identity" : "dotenv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftpackages/DotEnv.git",
+      "state" : {
+        "revision" : "1f15bb9de727d694af1d003a1a5d7a553752850f",
+        "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "fork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/0xLeif/Fork.git",
+      "state" : {
+        "revision" : "58c39d96cbf69cbbe9a5ea881936476fb8e8384c",
+        "version" : "1.3.0"
+      }
+    },
+    {
       "identity" : "rainbow",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Rainbow",
@@ -61,12 +79,84 @@ ScaffoldFile(directory: "SPX",
       }
     },
     {
+      "identity" : "shgit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/ShGit.git",
+      "state" : {
+        "revision" : "b0fab32154eb98da6cb327fefec56729473869a6",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "shxcrun",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FullQueueDeveloper/ShXcrun.git",
       "state" : {
         "revision" : "c84151a8c208de50f7ac5f3bcd096a538b4e120d",
         "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "swift-atomics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-atomics.git",
+      "state" : {
+        "revision" : "6c89474e62719ddcc1e9614989fff2f68208fe10",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "937e904258d22af6e447a0b72c0bc67583ef64a2",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "swift-nio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio.git",
+      "state" : {
+        "revision" : "6213ba7a06febe8fef60563a4a7d26a4085783cf",
+        "version" : "2.54.0"
+      }
+    },
+    {
+      "identity" : "swiftdraw",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swhitty/SwiftDraw.git",
+      "state" : {
+        "revision" : "6dcda6c714f55a1000bf5fdcb73cc3a73c0be31b",
+        "version" : "0.14.1"
+      }
+    },
+    {
+      "identity" : "swishxcassets",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/SwishXCAssets.git",
+      "state" : {
+        "revision" : "ffd7a1c39079fde2374b26cae5ef362ff3326f63",
+        "version" : "0.3.2"
+      }
+    },
+    {
+      "identity" : "version",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mxcl/Version.git",
+      "state" : {
+        "revision" : "1fe824b80d89201652e7eca7c9252269a1d85e25",
+        "version" : "2.0.1"
       }
     }
   ],
@@ -92,7 +182,7 @@ import PackageDescription
 let package = Package(
   name: "SPXScripts",
   platforms: [
-    .macOS(.v12),
+    .macOS(.v13),
   ],
   dependencies: [
     .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.2.0"),
@@ -224,6 +314,7 @@ struct BuildNumberAction {
       }
 
       let withoutPrefix = String(gitTag[tagPrefixRange.upperBound...])
+
 
       let splits = withoutPrefix.split(separator: "/build-")
       guard splits.count == 2 else {
@@ -457,6 +548,60 @@ ScaffoldFile(directory: "SPX",
        y="0" />
   </g>
 </svg>
+
+"""#),
+ScaffoldFile(directory: "SPX/.swiftpm/xcode/package.xcworkspace",
+             name: "contents.xcworkspacedata",
+             contents: #"""
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "self:">
+   </FileRef>
+</Workspace>
+
+"""#),
+ScaffoldFile(directory: "SPX/.swiftpm/xcode/xcuserdata/fullqueuedeveloper.xcuserdatad/xcschemes",
+             name: "xcschememanagement.plist",
+             contents: #"""
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>SPXScripts-Package.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>appicon.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>appstore.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>appicon</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>appstore</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
 
 """#),
   ]

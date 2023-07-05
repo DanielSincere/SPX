@@ -550,59 +550,5 @@ ScaffoldFile(directory: "SPX",
 </svg>
 
 """#),
-ScaffoldFile(directory: "SPX/.swiftpm/xcode/package.xcworkspace",
-             name: "contents.xcworkspacedata",
-             contents: #"""
-<?xml version="1.0" encoding="UTF-8"?>
-<Workspace
-   version = "1.0">
-   <FileRef
-      location = "self:">
-   </FileRef>
-</Workspace>
-
-"""#),
-ScaffoldFile(directory: "SPX/.swiftpm/xcode/xcuserdata/fullqueuedeveloper.xcuserdatad/xcschemes",
-             name: "xcschememanagement.plist",
-             contents: #"""
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>SchemeUserState</key>
-	<dict>
-		<key>SPXScripts-Package.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>appicon.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>appstore.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>appicon</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>appstore</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
-</dict>
-</plist>
-
-"""#),
   ]
 }

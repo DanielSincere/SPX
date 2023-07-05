@@ -35,7 +35,7 @@ final class HelpCommand {
     \("spx --help".cyan), -h
         show this message
 
-    \("spx".cyan) \("--init".cyan), -i
+    \("spx".cyan) \("--init".cyan), -i \("<template>".yellow)
         scaffold a new `SPX` project subdirectory
         in the current directory. The default
         subdirectory name is `\(spxDir.bold)`

@@ -13,10 +13,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-12
+          - os: macos-13
             swift: "5.7"
           - os: ubuntu-latest
             swift: "5.7"
+          - os: macos-13
+            swift: "5.8"
+          - os: ubuntu-latest
+            swift: "5.8"
 
     steps:
       - uses: swift-actions/setup-swift@v1
@@ -62,15 +66,20 @@ jobs:
 
       - name: "template ios - build"
         run: $(swift build -c release --show-bin-path)/spx --build
-        if: ${{ matrix.os == 'macos-12' }}
+        if: ${{ matrix.os == 'macos-13' }}
 
       - name: "template ios - generate app icon"
         run: $(swift build -c release --show-bin-path)/spx appicon
-        if: ${{ matrix.os == 'macos-12' }}
+        if: ${{ matrix.os == 'macos-13' }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: spx-ios-${{ matrix.swift }}-${{ matrix.os }}
+          path: SPX
 
       - name: "demo: build container"
         run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx docker
-        if: ${{ matrix.os != 'macos-12' }}
+        if: ${{ matrix.os != 'macos-13' }}
 
       - name: "demo: update and test"
         run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx UpdateAndTest

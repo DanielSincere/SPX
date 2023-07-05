@@ -1,6 +1,14 @@
 extension Templates {
   static let iosFiles: [ScaffoldFile] = [
     ScaffoldFile(directory: "SPX",
+             name: ".env.sample",
+             contents: #"""
+APPSTORECONNECT_API_KEY_ID=
+APPSTORECONNECT_ISSUER_ID=
+APPSTORECONNECT_DEVELOPMENT_TEAM=ARSTG12345
+
+"""#),
+ScaffoldFile(directory: "SPX",
              name: "README.md",
              contents: #"""
 # iOS SPX Scripts
@@ -11,11 +19,13 @@ These are some scripts for managing your iOS project. Included in this template 
 
 This script archives your app & pushes it up to the App Store.
 
-By default, it expects some environment variables, but of course feel free to get them how ever you like, perhaps using [Sh1Password](https://github.com/FullQueueDeveloper/Sh1Password.git).
+By default, it loads some environment variables from `SPX/.env`, but of course feel free to get them how ever you like, perhaps using [Sh1Password](https://github.com/FullQueueDeveloper/Sh1Password.git).
 
-- `APPLE_TEAM_ID` your development team ID in App Store Connect
-- `APPLE_API_KEY_ID` your API Key ID from App Store Connect
-- `APPLE_API_ISSUER_ID` your Issuer ID from App Store Connect
+
+- `APPSTORECONNECT_API_KEY_ID` your API Key ID from App Store Connect
+- `APPSTORECONNECT_ISSUER_ID` your Issuer ID from App Store Connect
+- `APPSTORECONNECT_DEVELOPMENT_TEAM` your development team ID in App Store Connect`
+
 You could also use other kinds of credentials for uploading to the App Store, such as username and password, using [LiteralPasswordCredential](https://github.com/FullQueueDeveloper/ShXcrun/blob/trunk/Sources/ShXcrun/Altool/Credential/LiteralPasswordCredential.swift). This will require generate an app-specific password at https://appleid.apple.com.
 
 Be sure to also update the scheme that is built. By default this is `App`. You may also want to update the script if you need to specify a project or workspace to `xcodebuild`.
@@ -32,6 +42,24 @@ ScaffoldFile(directory: "SPX",
              contents: #"""
 {
   "pins" : [
+    {
+      "identity" : "dotenv",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftpackages/DotEnv.git",
+      "state" : {
+        "revision" : "1f15bb9de727d694af1d003a1a5d7a553752850f",
+        "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "fork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/0xLeif/Fork.git",
+      "state" : {
+        "revision" : "58c39d96cbf69cbbe9a5ea881936476fb8e8384c",
+        "version" : "1.3.0"
+      }
+    },
     {
       "identity" : "rainbow",
       "kind" : "remoteSourceControl",
@@ -51,12 +79,84 @@ ScaffoldFile(directory: "SPX",
       }
     },
     {
+      "identity" : "shgit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/ShGit.git",
+      "state" : {
+        "revision" : "b0fab32154eb98da6cb327fefec56729473869a6",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "shxcrun",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FullQueueDeveloper/ShXcrun.git",
       "state" : {
         "revision" : "c84151a8c208de50f7ac5f3bcd096a538b4e120d",
         "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
+        "version" : "1.2.2"
+      }
+    },
+    {
+      "identity" : "swift-atomics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-atomics.git",
+      "state" : {
+        "revision" : "6c89474e62719ddcc1e9614989fff2f68208fe10",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "937e904258d22af6e447a0b72c0bc67583ef64a2",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "swift-nio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio.git",
+      "state" : {
+        "revision" : "6213ba7a06febe8fef60563a4a7d26a4085783cf",
+        "version" : "2.54.0"
+      }
+    },
+    {
+      "identity" : "swiftdraw",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swhitty/SwiftDraw.git",
+      "state" : {
+        "revision" : "6dcda6c714f55a1000bf5fdcb73cc3a73c0be31b",
+        "version" : "0.14.1"
+      }
+    },
+    {
+      "identity" : "swishxcassets",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FullQueueDeveloper/SwishXCAssets.git",
+      "state" : {
+        "revision" : "ffd7a1c39079fde2374b26cae5ef362ff3326f63",
+        "version" : "0.3.2"
+      }
+    },
+    {
+      "identity" : "version",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mxcl/Version.git",
+      "state" : {
+        "revision" : "1fe824b80d89201652e7eca7c9252269a1d85e25",
+        "version" : "2.0.1"
       }
     }
   ],
@@ -82,17 +182,28 @@ import PackageDescription
 let package = Package(
   name: "SPXScripts",
   platforms: [
-    .macOS(.v12),
+    .macOS(.v13),
   ],
   dependencies: [
     .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.2.0"),
-    .package(url: "https://github.com/FullQueueDeveloper/ShXcrun.git", from: "0.3.0"),
-    .package(url: "https://github.com/FullQueueDeveloper/SwishXCAssets.git", from: "0.3.2"),
+  .package(url: "https://github.com/FullQueueDeveloper/ShGit.git", from: "1.0.0"),
+  .package(url: "https://github.com/FullQueueDeveloper/ShXcrun.git", from: "0.2.0"),
+  .package(url: "https://github.com/FullQueueDeveloper/SwishXCAssets.git", from: "0.3.2"),
+  .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.2"),
+  .package(url: "https://github.com/swiftpackages/DotEnv.git", from: "3.0.0"),
+  .package(url: "https://github.com/mxcl/Version.git", from: "2.0.0"),
   ],
   targets: [
     .executableTarget(
       name: "appstore",
-      dependencies: ["Sh", "ShXcrun"]),
+      dependencies: [
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
+        "ShXcrun",
+        "ShGit",
+        "Sh",
+        "DotEnv",
+        "Version"
+    ]),
     .executableTarget(
       name: "appicon",
       dependencies: ["SwishXCAssets"]),
@@ -101,127 +212,277 @@ let package = Package(
 
 """#),
 ScaffoldFile(directory: "SPX/Sources/appstore",
-             name: "AppStoreMain.swift",
+             name: "EnvironmentKeys.swift",
              contents: #"""
+import DotEnv
+import Foundation
+
+enum EnvironmentKeys: String, CaseIterable {
+  case appleTeamId = "APPSTORECONNECT_DEVELOPMENT_TEAM"
+  case appstoreconnectIssuerId = "APPSTORECONNECT_ISSUER_ID"
+  case appstoreconnectApiKeyId = "APPSTORECONNECT_API_KEY_ID"
+
+  func ensurePresentInEnvironmentOrDotEnv(_ dotEnv: DotEnv) throws {
+    if nil == dotEnv.lines.first(where: { $0.key == self.rawValue })
+    && nil == ProcessInfo.processInfo.environment[self.rawValue] {
+      throw MissingEnvironmentKey(key: self.rawValue)
+    }
+  }
+
+  func get() throws -> String {
+    guard let value = ProcessInfo.processInfo.environment[self.rawValue] else {
+      throw MissingEnvironmentKey(key: self.rawValue)
+    }
+
+    return value
+  }
+
+  static func ensureAllPresentInEnvironmentOrDotEnv(_ dotEnv: DotEnv) throws {
+    for key in EnvironmentKeys.allCases {
+      try key.ensurePresentInEnvironmentOrDotEnv(dotEnv)
+    }
+  }
+
+  struct MissingEnvironmentKey: Error, LocalizedError {
+    let key: String
+
+    var errorDescription: String? {
+      "\(key) not found in `.env` or in environment"
+    }
+  }
+}
+
+"""#),
+ScaffoldFile(directory: "SPX/Sources/appstore",
+             name: "BuildNumberAction.swift",
+             contents: #"""
+import Version
 import Sh
 import Foundation
+import Version
+
+struct BuildNumberAction {
+
+  static let tagPrefix: String = "appstore/"
+
+  func updateBuildNumbers(newVersion: Version?) throws {
+
+    if let newVersion = newVersion {
+      let completeVersion = CompleteVersion(marketingVersion: newVersion, buildNumber: 1)
+      try createNewTag(completeVersion)
+      try updateInfoPlist(completeVersion)
+    } else {
+      let currentCompleteVersion = try getCurrentCompleteVersion()
+      let nextVersion = currentCompleteVersion.incrementingBuildNumber()
+
+      try createNewTag(nextVersion)
+      try updateInfoPlist(nextVersion)
+    }
+  }
+
+  enum Errors: Error {
+    case gitDidntFindTag
+    case gitTagDoesntHavePrefix, gitTagDoesntHaveSuffix
+    case gitTagDoesntParseVersionAfterRemovingPrefix, gitTagDoesntParseVersionAfterRemovingSuffix
+    case gitTagDoesntParseVersionAfterSplitting(String)
+    case malformedTag(String)
+    case buildNumberInGitTagMustBeAnInteger(String, String)
+  }
+
+  struct CompleteVersion: Equatable {
+    let marketingVersion: Version
+    let buildNumber: Int
+
+    func incrementingBuildNumber() -> CompleteVersion {
+      .init(marketingVersion: self.marketingVersion,
+            buildNumber: self.buildNumber + 1)
+    }
+
+    init(marketingVersion: Version, buildNumber: Int) {
+      self.marketingVersion = marketingVersion
+      self.buildNumber = buildNumber
+    }
+
+    var gitTag: String {
+      tagPrefix + self.marketingVersion.description + "/build-\(buildNumber)"
+    }
+
+    init(gitTag: String) throws {
+      
+      guard let tagPrefixRange = gitTag.range(of: tagPrefix) else {
+        throw Errors.gitTagDoesntHavePrefix
+      }
+
+      let withoutPrefix = String(gitTag[tagPrefixRange.upperBound...])
+
+
+      let splits = withoutPrefix.split(separator: "/build-")
+      guard splits.count == 2 else {
+        throw Errors.malformedTag(gitTag)
+      }
+
+      guard let version = Version(splits[0]) else {
+        throw Errors.gitTagDoesntParseVersionAfterSplitting(gitTag)
+      }
+
+      guard let buildNumber = Int(splits[1]) else {
+        throw Errors.buildNumberInGitTagMustBeAnInteger(gitTag, String(splits[1]))
+      }
+
+      self.init(marketingVersion: version, buildNumber: buildNumber)
+    }
+  }
+
+  func getMostRecentTag() throws -> String {
+    let cmd = "git tag -l '\(Self.tagPrefix)*' --sort='-version:refname' | head -n1"
+    guard let mostRecentTagString = try sh(cmd) else {
+      throw Errors.gitDidntFindTag
+    }
+    return mostRecentTagString
+  }
+
+  func getCurrentCompleteVersion() throws -> CompleteVersion {
+    let mostRecentTag = try getMostRecentTag()
+    return try CompleteVersion(gitTag: mostRecentTag)
+  }
+
+  func updateInfoPlist(_ completeVersion: CompleteVersion) throws {
+    try sh(.terminal, """
+      xcrun plutil \
+      -replace CFBundleShortVersionString -string \(completeVersion.marketingVersion) \
+      App/Info.plist
+      """)
+    try sh(.terminal, """
+      xcrun plutil \
+      -replace CFBundleVersion -string \(completeVersion.buildNumber) \
+      App/Info.plist
+      """)
+  }
+
+  func createNewTag(_ completeVersion: CompleteVersion) throws {
+    try sh(.terminal, "git tag \(completeVersion.gitTag)")
+  }
+}
+
+"""#),
+ScaffoldFile(directory: "SPX/Sources/appstore",
+             name: "AppStoreScript.swift",
+             contents: #"""
+import Sh
 import ShXcrun
+import ShGit
+import DotEnv
+import Version
+import Foundation
+import ArgumentParser
+
+/*
+USAGE: spx appstore [-n newVersionNumber]
+
+spx appstore: build & push to testflight, incrementing only the build number
+
+spx appstore -n 1.0.1: build & push to testflight, setting the version number and starting the build count at zero.
+
+*/
+extension Version: ExpressibleByArgument { }
+
+
 
 @main
-struct AppStoreMain {
+struct AppStoreScript: ParsableCommand {
 
-  static func main() throws {
-    let logRoot = "tmp/logs"
-    let artifactRoot = "tmp/artifacts"
+  @Option(name: .shortAndLong, help: "The new version number, resetting the build number.")
+  var newVersion: Version? = nil
 
-    try FileManager.default.resetDir(atPath: logRoot)
-    try FileManager.default.resetDir(atPath: artifactRoot)
-
-    let credential = try ApiKeyCredential(keyID: Secrets.apiKeyID.value(),
-                                          issuerID: Secrets.apiIssuerID.value())
-
-    try AppStore(logRoot: logRoot, artifactRoot: artifactRoot)
-      .buildAndUpload(scheme: "App",
-                      appleTeamID: Secrets.appleTeamID.value(),
-                      uploadCredential: credential)
-  }
-}
-
-extension FileManager {
-  func resetDir(atPath path: String) throws {
-    if FileManager.default.fileExists(atPath: path) {
-      try FileManager.default.removeItem(atPath: path)
-    }
-    try FileManager.default.createDirectory(atPath: path,
-                                            withIntermediateDirectories: true)
-  }
-}
-
-"""#),
-ScaffoldFile(directory: "SPX/Sources/appstore",
-             name: "Secrets.swift",
-             contents: #"""
-import Foundation
-
-enum Secrets: String {
-  case appleTeamID = "APPLE_TEAM_ID"
-  case apiKeyID = "APPLE_API_KEY_ID"
-  case apiIssuerID = "APPLE_API_ISSUER_ID"
-
-  func value() throws -> String {
-    guard let v = ProcessInfo.processInfo.environment[rawValue] else {
-      throw Missing(secret: self)
-    }
-
-    return v
-  }
-
-  struct Missing: Error, LocalizedError {
-    let secret: Secrets
-
-    var errorDescription: String {
-      "Could not find \(secret.rawValue) in the environment"
+  mutating func run() throws {
+    do {
+      try setup()
+      try ensureCleanRepo()
+      try updateBuildNumbers(newVersion: newVersion)
+      try archive()
+      try exportArchive()
+      try upload()
+      try pushTags()
+      print("Complete!".cyan)
+    } catch {
+      print("Error".red, error.localizedDescription)
     }
   }
-}
 
-"""#),
-ScaffoldFile(directory: "SPX/Sources/appstore",
-             name: "AppStore.swift",
-             contents: #"""
-import Foundation
-import Sh
-import ShXcrun
-import Rainbow
+  private var scheme: String { "App" }
+  private var logsDir: String { "SPX/logs" }
+  private var artifactsPath: String { "SPX/artifacts" }
+  private var archivePath: String { "\(artifactsPath)/\(scheme).xcarchive" }
 
-struct AppStore {
-  let logRoot: String
-  let artifactRoot: String
+  private func setup() throws {
+    try DotEnv.load(path: "SPX/.env")
 
-  func buildAndUpload(scheme: String,
-                      appleTeamID: String,
-                      uploadCredential: AltoolCredential?) throws {
+    try sh(.terminal, "mkdir -p \(artifactsPath)")
+    try sh(.terminal, "mkdir -p \(logsDir)")
+  }
 
-    let archivePath = "\(artifactRoot)/\(scheme).xcarchive"
-    let exportOptionsPath = "\(artifactRoot)/\(scheme)-exportOptions.plist"
-    let derivedDataPath = "\(artifactRoot)/DerivedData"
+  private func pushTags() throws {
+    try sh(.terminal, "git push --tags")
+  }
 
-    print("=== Build start ===".cyan)
+  private func ensureCleanRepo() throws {
+    struct GitRepoNotClean: LocalizedError {
+      let errorDescription: String? = "Git repo must be clean to push to App Store"
+    }
+    guard try Git().isClean() else {
+      throw GitRepoNotClean()
+    }
+  }
 
-    let exportOptions = ExportOptions(compileBitcode: true,
-                                      manageAppVersionAndBuildNumber: true,
+  private func updateBuildNumbers(newVersion: Version?) throws {
+    try BuildNumberAction().updateBuildNumbers(newVersion: newVersion)
+  }
+
+  private func archive() throws {
+    let archiveCommand = """
+      xcodebuild archive -scheme "\(scheme)" \
+      -destination generic/platform=iOS \
+      -archivePath "\(archivePath)"
+      """
+
+    try sh(.file("\(logsDir)/archive.log"), archiveCommand)
+  }
+
+  private func exportArchive() throws {
+    let exportOptionsPath = "\(artifactsPath)/\(scheme)-exportOptions.plist"
+
+    let exportOptions = ExportOptions(compileBitcode: false,
+                                      manageAppVersionAndBuildNumber: false,
                                       method: .appStore,
-                                      teamID: appleTeamID,
-                                      uploadBitcode: true,
+                                      teamID: try EnvironmentKeys.appleTeamId.get(),
+                                      uploadBitcode: false,
                                       uploadSymbols: true)
     try exportOptions.write(to: exportOptionsPath)
 
-    try sh(.file("\(logRoot)/\(scheme)-archive.log"),
+    let exportArchiveCommand = """
+      xcodebuild -exportArchive \
+      -archivePath "\(archivePath)" \
+      -exportPath "\(artifactsPath)" \
+      -exportOptionsPlist "\(exportOptionsPath)" \
+      -allowProvisioningUpdates
+      """
+    try sh(.file("\(logsDir)/exportArchive.log"), exportArchiveCommand)
+  }
+
+  private func upload() throws{
+    let uploadCommand = """
+    xcrun altool --upload-app -t ios \
+    -f "\(artifactsPath)/\(scheme).ipa" \
+    --apiKey $API_KEY_ID \
+    --apiIssuer $API_ISSUER_ID
     """
-    xcrun xcodebuild archive -scheme \(scheme) \
-    -destination "generic/platform=iOS" \
-    -derivedDataPath "\(derivedDataPath)" \
-    -archivePath "\(archivePath)"
-    """)
 
-    try sh(.file("\(logRoot)/\(scheme)-exportArchive.log"),
-    """
-    xcrun xcodebuild -exportArchive \
-    -archivePath "\(archivePath)" \
-    -exportPath \(artifactRoot) \
-    -exportOptionsPlist \(exportOptionsPath)
-    """)
-
-    guard let credential = uploadCredential else {
-      print("No credential for `altool` provided. Skipping upload".yellow)
-      return
-    }
-
-    let altool = Altool(credential: credential)
-    try altool.uploadApp(.file("\(logRoot)/upload.log"), file: "\(artifactRoot)/\(scheme).ipa", platform: .iOS)
+    try sh(.terminal, uploadCommand, environment: [
+      "API_KEY_ID": try EnvironmentKeys.appstoreconnectApiKeyId.get(),
+      "API_ISSUER_ID": try EnvironmentKeys.appstoreconnectIssuerId.get()
+    ])
   }
 }
-
 
 """#),
 ScaffoldFile(directory: "SPX/Sources/appicon",
@@ -287,6 +548,60 @@ ScaffoldFile(directory: "SPX",
        y="0" />
   </g>
 </svg>
+
+"""#),
+ScaffoldFile(directory: "SPX/.swiftpm/xcode/package.xcworkspace",
+             name: "contents.xcworkspacedata",
+             contents: #"""
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "self:">
+   </FileRef>
+</Workspace>
+
+"""#),
+ScaffoldFile(directory: "SPX/.swiftpm/xcode/xcuserdata/fullqueuedeveloper.xcuserdatad/xcschemes",
+             name: "xcschememanagement.plist",
+             contents: #"""
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>SPXScripts-Package.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>appicon.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>appstore.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>appicon</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>appstore</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
 
 """#),
   ]

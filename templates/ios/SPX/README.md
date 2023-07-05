@@ -6,11 +6,12 @@ These are some scripts for managing your iOS project. Included in this template 
 
 This script archives your app & pushes it up to the App Store.
 
-By default, it expects some environment variables, but of course feel free to get them how ever you like, perhaps using [Sh1Password](https://github.com/FullQueueDeveloper/Sh1Password.git).
+By default, it loads some environment variables from `SPX/.env`, but of course feel free to get them how ever you like, perhaps using [Sh1Password](https://github.com/FullQueueDeveloper/Sh1Password.git).
 
-- `APPLE_TEAM_ID` your development team ID in App Store Connect
-- `APPLE_API_KEY_ID` your API Key ID from App Store Connect
-- `APPLE_API_ISSUER_ID` your Issuer ID from App Store Connect
+
+- `APPSTORECONNECT_API_KEY_ID` your API Key ID from App Store Connect
+- `APPSTORECONNECT_ISSUER_ID` your Issuer ID from App Store Connect
+- `APPSTORECONNECT_DEVELOPMENT_TEAM` your development team ID in App Store Connect`
 
 You could also use other kinds of credentials for uploading to the App Store, such as username and password, using [LiteralPasswordCredential](https://github.com/FullQueueDeveloper/ShXcrun/blob/trunk/Sources/ShXcrun/Altool/Credential/LiteralPasswordCredential.swift). This will require generate an app-specific password at https://appleid.apple.com.
 

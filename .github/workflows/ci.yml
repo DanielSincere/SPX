@@ -13,11 +13,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-latest
+          - os: macos-13
             swift: "5.7"
           - os: ubuntu-latest
             swift: "5.7"
-          - os: macos-latest
+          - os: macos-13
             swift: "5.8"
           - os: ubuntu-latest
             swift: "5.8"
@@ -66,11 +66,11 @@ jobs:
 
       - name: "template ios - build"
         run: $(swift build -c release --show-bin-path)/spx --build
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-13' }}
 
       - name: "template ios - generate app icon"
         run: $(swift build -c release --show-bin-path)/spx appicon
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-13' }}
 
       - uses: actions/upload-artifact@v3
         with:
@@ -79,7 +79,7 @@ jobs:
 
       - name: "demo: build container"
         run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx docker
-        if: ${{ matrix.os != 'macos-latest' }}
+        if: ${{ matrix.os != 'macos-13' }}
 
       - name: "demo: update and test"
         run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx UpdateAndTest

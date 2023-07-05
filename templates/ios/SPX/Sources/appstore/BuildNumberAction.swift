@@ -57,6 +57,7 @@ struct BuildNumberAction {
 
       let withoutPrefix = String(gitTag[tagPrefixRange.upperBound...])
 
+
       let splits = withoutPrefix.split(separator: "/build-")
       guard splits.count == 2 else {
         throw Errors.malformedTag(gitTag)

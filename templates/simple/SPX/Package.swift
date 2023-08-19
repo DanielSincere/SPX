@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
@@ -8,7 +8,7 @@ let package = Package(
     .macOS(.v12),
   ],
   dependencies: [
-    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.2.0"),
+    .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.3.0"),
   ],
   targets: [
     .executableTarget(

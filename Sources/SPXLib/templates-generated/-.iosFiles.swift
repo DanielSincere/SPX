@@ -175,7 +175,7 @@ ScaffoldFile(directory: "SPX",
 ScaffoldFile(directory: "SPX",
              name: "Package.swift",
              contents: #"""
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
@@ -308,7 +308,7 @@ struct BuildNumberAction {
     }
 
     init(gitTag: String) throws {
-      
+
       guard let tagPrefixRange = gitTag.range(of: tagPrefix) else {
         throw Errors.gitTagDoesntHavePrefix
       }

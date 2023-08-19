@@ -71,7 +71,9 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: spx-ios-${{ matrix.swift }}-${{ matrix.os }}
-          path: SPX
+          path: |
+            SPX
+            !.build
 
       - name: "demo: build container"
         run: cd demos/VaporDemo && $(swift build -c release --package-path ../.. --show-bin-path)/spx docker

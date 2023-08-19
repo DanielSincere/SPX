@@ -19,9 +19,9 @@ jobs:
             swift: "5.8"
 
     steps:
-      - uses: swift-actions/setup-swift@v1
+      - uses: slashmo/install-swift@v0.4.0
         with:
-          swift-version: ${{ matrix.swift }}
+          version: ${{ matrix.swift }}
 
       - uses: actions/checkout@v3
 

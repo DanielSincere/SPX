@@ -1,10 +1,10 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.8
 
 import PackageDescription
 
 let package = Package(
   name: "VaporDemo",
-  platforms: [.macOS(.v12)],
+  platforms: [.macOS(.v13)],
 
   dependencies: [
     .package(url: "https://github.com/vapor/vapor.git", from: "4.55.0"),

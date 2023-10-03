@@ -15,8 +15,12 @@ jobs:
         include:
           - os: macos-13
             swift: "5.8"
+          - os: macos-13
+            swift: "5.9"
           - os: ubuntu-latest
             swift: "5.8"
+          - os: ubuntu-latest
+            swift: "5.9"
 
     steps:
       - uses: slashmo/install-swift@v0.4.0

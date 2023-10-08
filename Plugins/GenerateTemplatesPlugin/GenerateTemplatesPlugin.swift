@@ -4,25 +4,19 @@ import Foundation
 @main
 struct GenerateTemplatesPlugin: BuildToolPlugin {
   func createBuildCommands(context: PackagePlugin.PluginContext, target: PackagePlugin.Target) async throws -> [PackagePlugin.Command] {
-    print("hiello from plugin")
 
-    // return [
-      // .buildCommand(
-      //   displayName: "GenerateTemplatesPlugin",
-      //   executable: try context.tool(named: "GenerateTemplatesTool").path,
-      //   arguments: [])]
-   return [
-     .prebuildCommand(
-        displayName: "Tomato",
-        executable: Path("/usr/bin/swift"),
+    //    let spxlibTarget = try context.package.targets(named: ["SPXLib"]).first!
+//    let outputDir = context.pluginWorkDirectory.appending("GeneratedFiles")
+    return [
+      .buildCommand(
+        displayName: "GenerateTemplatesPlugin",
+        executable: try context.tool(named: "GenerateTemplatesTool").path,
         arguments: [
-          "run",
-          "GenerateTemplates"
+          context.pluginWorkDirectory.string
         ],
+        outputFiles: [context.pluginWorkDirectory.appending("/ttt.swift")]
+      ),
 
-
-        outputFilesDirectory: context.package.directory
-
-     )]
+    ]
   }
 }

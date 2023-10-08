@@ -13,7 +13,7 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.0"),
     .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.3.0"),
-    .package(path: "PluginsPackage"),
+//    .package(path: "PluginsPackage"),
   ],
   targets: [
     .executableTarget(
@@ -34,10 +34,12 @@ let package = Package(
       ]),
     .plugin(
       name: "GenerateTemplatesPlugin",
-      capability: .buildTool(),
+      capability: .buildTool,
       dependencies: [
-        .product(name: "GenerateTemplatesTool", package: "PluginsPackage")
+        "GenerateTemplatesTool"
       ]
     ),
+    .executableTarget(name: "GenerateTemplatesTool",
+                     dependencies: [])
   ]
 )

@@ -9,7 +9,13 @@ struct GenerateTemplatesPlugin: BuildToolPlugin {
 
     let contents = try FileManager.default.contentsOfDirectory(atPath: templatesDir.string)
 
-    print(contents)
+    
+    let enumerator = FileManager.default.enumerator(atPath: templatesDir.string)
+    
+    
+    let inputFiles = paths(fromEnumerator: enumerator!).map { path in
+      templatesDir.appending(path)
+    }
 
     return [
       .buildCommand(
@@ -19,13 +25,21 @@ struct GenerateTemplatesPlugin: BuildToolPlugin {
           templatesDir.string,
           context.pluginWorkDirectory.string
         ],
-        inputFiles: contents.map { Path($0) },
+        inputFiles: inputFiles,
         outputFiles: [
           context.pluginWorkDirectory.appending("Templates.swift"),
         ] + contents.map({ templateName in
-          Path("\(templateName)Template.swift")
+          context.pluginWorkDirectory.appending("\(templateName)Template.swift")
         })
       ),
     ]
+  }
+  
+  func paths(fromEnumerator enumerator: FileManager.DirectoryEnumerator) -> [String] {
+    var result: [String] = []
+    while let file = enumerator.nextObject() as? String {
+      result += [file]
+    }
+    return result
   }
 }

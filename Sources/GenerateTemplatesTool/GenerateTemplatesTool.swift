@@ -5,7 +5,6 @@ import ArgumentParser
 @main
 struct GenerateTemplatesTool: ParsableCommand {
 
-
   @Argument(help: "input dir to read templates from")
   var templatesDir: String
 
@@ -68,12 +67,12 @@ struct GenerateTemplatesTool: ParsableCommand {
 
     return try templateNames.reduce([:]) { result, next in
 
-      let enumerator = FileManager.default.enumerator(atPath: "templates/\(next)")
+      let enumerator = FileManager.default.enumerator(atPath: "\(templatesDir)/\(next)")
       guard let enumerator = enumerator else {
         struct CouldNotCreateEnumerator: Error {
           let path: String
         }
-        throw CouldNotCreateEnumerator(path: "templates/\(next)")
+        throw CouldNotCreateEnumerator(path: "\(templatesDir)/\(next)")
       }
 
       var files: [ScaffoldFile] = []
@@ -81,6 +80,10 @@ struct GenerateTemplatesTool: ParsableCommand {
       while let file = enumerator.nextObject() as? String {
 
         let filePath = rootPath.appending(file)//"templates/\(next)/\(file)"
+        
+        guard !filePath.isDirectory else {
+          continue
+        }
         do {
           let contents = try String(contentsOfFile: filePath.string)
           let name = filePath.lastComponent!
@@ -102,6 +105,16 @@ struct GenerateTemplatesTool: ParsableCommand {
         return rhs
       }
     }
+  }
+}
+
+extension FilePath {
+  var isDirectory: Bool {
+    var directory = ObjCBool(false)
+    guard FileManager.default.fileExists(atPath: self.string, isDirectory: &directory) else {
+      return false
+    }
+    return directory.boolValue
   }
 }
 

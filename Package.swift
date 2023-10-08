@@ -9,10 +9,12 @@ let package = Package(
   ],
   products: [
     .executable(name: "spx", targets: ["spx"]),
+    .plugin(name: "GenerateTemplatesPlugin", targets: ["GenerateTemplatesPlugin"])
   ],
   dependencies: [
     .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.0"),
     .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.3.0"),
+//    .package(path: "PluginsPackage"),
   ],
   targets: [
     .executableTarget(
@@ -20,21 +22,24 @@ let package = Package(
       dependencies: ["SPXLib"]),
     .target(
       name: "SPXLib",
-      dependencies: ["Sh", "Rainbow"]),
+      dependencies: ["Sh", "Rainbow", ],
+      plugins: [
+        .plugin(name: "GenerateTemplatesPlugin")]
+    ),
     .testTarget(
       name: "SPXTests",
       dependencies: ["SPXLib"],
       resources: [
         .copy("Fixtures"),
       ]),
+    .executableTarget(name: "GenerateTemplatesTool", dependencies: []),
     .plugin(
-      name: "GenerateTemplates",
-      capability:
-          .command(intent:
-              .custom(verb: "generate-templates",
-                      description: "Generate code for the templates"),
-                   permissions:  [
-                    .writeToPackageDirectory(reason: "Generate code for the templates")
-                   ]))
+      name: "GenerateTemplatesPlugin",
+      capability: .buildTool(),
+      dependencies: [
+        "GenerateTemplatesTool",
+      ]
+    ),
+
   ]
 )

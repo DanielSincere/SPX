@@ -27,5 +27,14 @@ let package = Package(
       resources: [
         .copy("Fixtures"),
       ]),
+    .plugin(
+      name: "GenerateTemplates",
+      capability:
+          .command(intent:
+              .custom(verb: "generate-templates",
+                      description: "Generate code for the templates"),
+                   permissions:  [
+                    .writeToPackageDirectory(reason: "Generate code for the templates")
+                   ]))
   ]
 )

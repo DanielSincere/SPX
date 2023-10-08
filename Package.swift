@@ -24,7 +24,8 @@ let package = Package(
       name: "SPXLib",
       dependencies: ["Sh", "Rainbow", ],
       plugins: [
-        .plugin(name: "GenerateTemplatesPlugin")]
+        .plugin(name: "GenerateTemplatesPlugin")
+      ]
     ),
     .testTarget(
       name: "SPXTests",
@@ -40,6 +41,5 @@ let package = Package(
         "GenerateTemplatesTool",
       ]
     ),
-
   ]
 )

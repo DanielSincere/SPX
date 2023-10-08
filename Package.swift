@@ -9,12 +9,11 @@ let package = Package(
   ],
   products: [
     .executable(name: "spx", targets: ["spx"]),
-    .plugin(name: "GenerateTemplatesPlugin", targets: ["GenerateTemplatesPlugin"])
   ],
   dependencies: [
     .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.0"),
     .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.3.0"),
-//    .package(path: "PluginsPackage"),
+    .package(path: "PluginsPackage"),
   ],
   targets: [
     .executableTarget(
@@ -33,12 +32,11 @@ let package = Package(
       resources: [
         .copy("Fixtures"),
       ]),
-    .executableTarget(name: "GenerateTemplatesTool", dependencies: []),
     .plugin(
       name: "GenerateTemplatesPlugin",
       capability: .buildTool(),
       dependencies: [
-        "GenerateTemplatesTool",
+        .product(name: "GenerateTemplatesTool", package: "PluginsPackage")
       ]
     ),
   ]

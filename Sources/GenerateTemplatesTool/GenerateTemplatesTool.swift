@@ -1,5 +1,5 @@
 import Foundation
-import System
+import SystemPackage
 import ArgumentParser
 
 @main
@@ -80,7 +80,7 @@ struct GenerateTemplatesTool: ParsableCommand {
       while let file = enumerator.nextObject() as? String {
 
         let filePath = rootPath.appending(file)//"templates/\(next)/\(file)"
-        
+
         guard !filePath.isDirectory else {
           continue
         }

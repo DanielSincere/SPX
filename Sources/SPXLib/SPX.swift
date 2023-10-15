@@ -7,6 +7,7 @@ public struct SPX {
   public init() {}
 
   public func run(_ arguments: [String]) {
+
     do {
       let defaultScriptsDir = "SPX"
       try self.parse(arguments: Array(arguments.dropFirst()), spxDir: defaultScriptsDir)

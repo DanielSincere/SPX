@@ -1,26 +1,28 @@
 import Foundation
-import Sh
-import SystemPackage
+import System
+import ArgumentParser
 
 @main
-struct GenerateMain {
+struct GenerateTemplatesTool: ParsableCommand {
 
-  static func main() throws {
+  @Argument(help: "input dir to read templates from")
+  var templatesDir: String
+
+  @Argument(help: "output dir to write to")
+  var outputDir: String
+
+  mutating func run() throws {
     let templates: [String: [ScaffoldFile]] = try detectTemplates()
-    try generateTemplateEnum(templates: Array(templates.keys))
+    try generateTemplateEnum(outputDir: outputDir, templates: Array(templates.keys))
 
     try templates.forEach { template, files in
-      try writeContentsFile(name: template, files: files)
+      try writeContentsFile(outputDir: outputDir, name: template, files: files)
     }
-    try sh(.terminal, "swift build")
   }
 
-  static func generateTemplateEnum(templates: [String]) throws {
-    try FileManager.default.resetDir(atPath: "Sources/SPXLib/templates-generated/")
+  func generateTemplateEnum(outputDir: String, templates: [String]) throws {
 
-    try sh(.terminal, "rm -fr ./**/.build")
-
-    let path = "Sources/SPXLib/templates-generated/Templates.swift"
+    let path = "\(outputDir)/Templates.swift"
     let contents =
     """
     enum Templates: String, CaseIterable {
@@ -38,8 +40,8 @@ struct GenerateMain {
     try contents.data(using: .utf8)!.write(to: path.asURL)
   }
 
-  static func writeContentsFile(name: String, files: [ScaffoldFile]) throws {
-    let path = "Sources/SPXLib/templates-generated/-.\(name)Files.swift"
+  func writeContentsFile(outputDir: String, name: String, files: [ScaffoldFile]) throws {
+    let path = "\(outputDir)/\(name)Template.swift"
     let contents =
     """
     extension Templates {
@@ -59,25 +61,29 @@ struct GenerateMain {
     try contents.data(using: .utf8)!.write(to: path.asURL)
   }
 
-  static func detectTemplates() throws -> [String: [ScaffoldFile]] {
+  func detectTemplates() throws -> [String: [ScaffoldFile]] {
     let templateNames = try FileManager.default
-      .contentsOfDirectory(atPath: "templates")
+      .contentsOfDirectory(atPath: templatesDir)
 
     return try templateNames.reduce([:]) { result, next in
 
-      let enumerator = FileManager.default.enumerator(atPath: "templates/\(next)")
+      let enumerator = FileManager.default.enumerator(atPath: "\(templatesDir)/\(next)")
       guard let enumerator = enumerator else {
         struct CouldNotCreateEnumerator: Error {
           let path: String
         }
-        throw CouldNotCreateEnumerator(path: "templates/\(next)")
+        throw CouldNotCreateEnumerator(path: "\(templatesDir)/\(next)")
       }
 
       var files: [ScaffoldFile] = []
-      let rootPath = FilePath("templates/\(next)/")
+      let rootPath = FilePath("\(templatesDir)/\(next)/")
       while let file = enumerator.nextObject() as? String {
 
         let filePath = rootPath.appending(file)//"templates/\(next)/\(file)"
+        
+        guard !filePath.isDirectory else {
+          continue
+        }
         do {
           let contents = try String(contentsOfFile: filePath.string)
           let name = filePath.lastComponent!
@@ -99,6 +105,16 @@ struct GenerateMain {
         return rhs
       }
     }
+  }
+}
+
+extension FilePath {
+  var isDirectory: Bool {
+    var directory = ObjCBool(false)
+    guard FileManager.default.fileExists(atPath: self.string, isDirectory: &directory) else {
+      return false
+    }
+    return directory.boolValue
   }
 }
 

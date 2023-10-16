@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -14,7 +14,7 @@ let package = Package(
     .package(url: "https://github.com/onevcat/Rainbow", from: "4.0.0"),
     .package(url: "https://github.com/FullQueueDeveloper/Sh.git", from: "1.3.0"),
     .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.0"),
-//    .package(path: "PluginsPackage"),
+    .package(url: "https://github.com/apple/swift-system", from: "1.0.0"),
   ],
   targets: [
     .executableTarget(
@@ -44,6 +44,7 @@ let package = Package(
       name: "GenerateTemplatesTool",
       dependencies: [
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
+        .product(name: "SystemPackage", package: "swift-system"),
       ])
   ]
 )

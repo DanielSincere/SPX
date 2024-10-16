@@ -5,9 +5,9 @@
 
 SPX is a Swift script running tool. Easily run Swift packages in a supporting relative dir named `SPX`
 
-SPX pairs nicely with [Sh](https://github.com/FullQueueDeveloper/Sh) to run shell commands and process shell output from your Swift scripts.
+SPX pairs nicely with [Sh](https://github.com/DanielSincere/Sh) to run shell commands and process shell output from your Swift scripts.
 
-For a full example of using SPX, [Sh](https://github.com/FullQueueDeveloper/Sh), and [ShXcrun](https://github.com/FullQueueDeveloper/ShXcrun) on your iOS project, please see https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+For a full example of using SPX, [Sh](https://github.com/DanielSincereSh), and [ShXcrun](https://github.com/DanielSincere/ShXcrun) on your iOS project, please see https://github.com/DanielSincere/SwishExampleiOSProject
 
 ## Motivation
 
@@ -27,22 +27,22 @@ SPX is currently available through [Homebrew](https://brew.sh), [Mint](https://g
 
 Install with [Homebrew](https://brew.sh)
 
-    brew install fullqueuedeveloper/fullqueuedeveloper/spx
+    brew install danielsincere/tap/spx
 
 Or if using a `Brewfile`, add these lines to it
 
-    tap "fullqueuedeveloper/fullqueuedeveloper"
+    tap "danielsincere/tap"
     brew "spx"
 
 ### Mint
 
 Install with [Mint](https://github.com/yonaskolb/Mint)
 
-    mint install FullQueueDeveloper/SPX
+    mint install DanielSincere/SPX
 
 ### Manual
 
-    git clone https://github.com/FullQueueDeveloper/SPX.git
+    git clone https://github.com/DanielSincere/SPX.git
     cd SPX
     swift build -c release
 
@@ -118,7 +118,7 @@ There is an example project in the `demos` folder
 
 - Screenshots. This PR shows the power of using Sh & SPX for scripting. It uses `CoreGraphics` and `AVFoundation` along with `Sh` to take screenshots, and process them for the App Store & for publishing to a website. https://github.com/0xOpenBytes/ios-base/pull/14
 
-- Demo iOS project https://github.com/FullQueueDeveloper/SwishExampleiOSProject
+- Demo iOS project https://github.com/DanielSincere/SwishExampleiOSProject
 
 ## Upgrading from Swish
 
@@ -126,5 +126,5 @@ Swish was the previous name of this tool.
 
 1. Rename your `Swish` directories to `SPX`
 2. Untap the previous Homebrew tap: `brew untap fullqueuedeveloper/swish`
-3. Tap the current Homebrew tap: `brew tap fullqueuedeveloper/fullqueuedeveloper`
+3. Tap the current Homebrew tap: `brew tap DanielSincere/tap`
 4. Install SPX: `brew install spx`

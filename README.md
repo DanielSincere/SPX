@@ -1,13 +1,13 @@
 # SPX
 
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFullQueueDeveloper%2FSPX%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/FullQueueDeveloper/SPX)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFullQueueDeveloper%2FSPX%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/FullQueueDeveloper/SPX)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFullQueueDeveloper%2FSPX%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/DanielSincere/SPX)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFullQueueDeveloper%2FSPX%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/DanielSincere/SPX)
 
 SPX is a Swift script running tool. Easily run Swift packages in a supporting relative dir named `SPX`
 
 SPX pairs nicely with [Sh](https://github.com/DanielSincere/Sh) to run shell commands and process shell output from your Swift scripts.
 
-For a full example of using SPX, [Sh](https://github.com/DanielSincereSh), and [ShXcrun](https://github.com/DanielSincere/ShXcrun) on your iOS project, please see https://github.com/DanielSincere/SwishExampleiOSProject
+For a full example of using SPX, [Sh](https://github.com/DanielSincere/Sh), and [ShXcrun](https://github.com/DanielSincere/ShXcrun) on your iOS project, please see https://github.com/DanielSincere/SwishExampleiOSProject
 
 ## Motivation
 
